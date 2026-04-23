@@ -1,0 +1,542 @@
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electro Boutique - Electrodomesticos y climatización de alta gama </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        nav {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2e3b3d;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #749298;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: #a0a0a0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #9fcbd4 0%, #41565c 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px #90bfc84d;
+        }
+
+        /* Secciones de productos */
+        section {
+            padding: 4rem 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: #1a1a2e;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, hsl(191, 15%, 59%), #0099cc);
+            border-radius: 2px;
+        }
+
+        /* Grid de productos */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #f0f0f0;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #1a1a2e;
+        }
+
+        .product-info p {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            color: #00d4ff;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        /* Sección de características */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-item h3 {
+            color: #1a1a2e;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-item p {
+            color: #666;
+        }
+
+        /* About Section */
+        .about {
+            background: #f9f9f9;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            color: #1a1a2e;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: white;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contact h2 {
+            color: white;
+        }
+
+        .contact h2::after {
+            background: #00d4ff;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            padding: 1.5rem;
+        }
+
+        .contact-item h4 {
+            margin-bottom: 0.5rem;
+            color: #00d4ff;
+        }
+
+        .contact-item p {
+            color: #a0a0a0;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f0f1e;
+            color: #a0a0a0;
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid #1a1a2e;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        .social-links {
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: #00d4ff;
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: white;
+        }
+
+        /* Animaciones */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">⚡ ELECTRO BOUTIQUE</a>
+            <ul>
+                <li><a href="#productos">Productos</a></li>
+                <li><a href="#acerca">Acerca de</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="container">
+            <h1>Tecnología Premium para tu Vida</h1>
+            <p>Descubre los mejores gadgets y dispositivos electrónicos de última generación</p>
+            <button class="btn">Explorar Catálogo</button>
+        </div>
+    </div>
+
+    <!-- Características -->
+    <section>
+        <div class="container">
+            <h2>¿Por qué elegirnos?</h2>
+            <div class="features">
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <h3>Calidad Garantizada</h3>
+                    <p>Todos nuestros productos cuentan con garantía oficial</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🚚</div>
+                    <h3>Envío Rápido</h3>
+                    <p>Entrega en 24-48 horas a toda el país</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💳</div>
+                    <h3>Pago Flexible</h3>
+                    <p>Múltiples opciones de pago disponibles</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📞</div>
+                    <h3>Soporte 24/7</h3>
+                    <p>Atención al cliente disponible todo el tiempo</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Productos Destacados -->
+    <section id="productos">
+        <div class="container">
+            <h2>Productos Destacados</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">📱</div>
+                    <div class="product-info">
+                        <h3>Smartphone Premium</h3>
+                        <p>Última generación con pantalla AMOLED y procesador de última tecnología</p>
+                        <div class="price">$899.99</div>
+                        <button class="btn">Ver más</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">⌚</div>
+                    <div class="product-info">
+                        <h3>Smartwatch Elite</h3>
+                        <p>Reloj inteligente con monitoreo de salud y GPS integrado</p>
+                        <div class="price">$299.99</div>
+                        <button class="btn">Ver más</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🎧</div>
+                    <div class="product-info">
+                        <h3>Audífonos Inalámbricos</h3>
+                        <p>Sonido de alta calidad con cancelación de ruido activa</p>
+                        <div class="price">$199.99</div>
+                        <button class="btn">Ver más</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">💻</div>
+                    <div class="product-info">
+                        <h3>Laptop Ultradelgada</h3>
+                        <p>Portátil de alto rendimiento para profesionales</p>
+                        <div class="price">$1,299.99</div>
+                        <button class="btn">Ver más</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">📷</div>
+                    <div class="product-info">
+                        <h3>Cámara Digital 4K</h3>
+                        <p>Captura video en 4K con estabilización de imagen</p>
+                        <div class="price">$599.99</div>
+                        <button class="btn">Ver más</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🎮</div>
+                    <div class="product-info">
+                        <h3>Consola de Juegos</h3>
+                        <p>Nueva generación con gráficos ultra realistas</p>
+                        <div class="price">$499.99</div>
+                        <button class="btn">Ver más</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Acerca de -->
+    <section class="about" id="acerca">
+        <div class="container">
+            <h2>Acerca de Nosotros</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Tu tienda de tecnología confiable</h3>
+                    <p>En Electro Boutique, nos especializamos en ofrecer los mejores productos electrónicos y gadgets de última generación. Con más de 10 años de experiencia en el mercado, nos hemos ganado la confianza de miles de clientes.</p>
+                    <p>Nuestro compromiso es proporcionar productos de calidad, precios competitivos y un servicio al cliente excepcional. Cada artículo en nuestro catálogo es cuidadosamente seleccionado para garantizar tu satisfacción.</p>
+                    <button class="btn">Conoce más</button>
+                </div>
+                <div class="about-image">⚡</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section class="contact" id="contacto">
+        <div class="container">
+            <h2>Contacto</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h4>Dirección</h4>
+                    <p>Calle Principal 123<br>Ciudad, País<br>CP 12345</p>
+                </div>
+                <div class="contact-item">
+                    <h4>Teléfono</h4>
+                    <p>+1 (555) 123-4567<br>Lunes a Viernes: 9am - 6pm<br>Sábados: 10am - 2pm</p>
+                </div>
+                <div class="contact-item">
+                    <h4>Email</h4>
+                    <p>info@electroboutique.com<br>soporte@electroboutique.com<br>ventas@electroboutique.com</p>
+                </div>
+            </div>
+            <button class="btn">Enviar Mensaje</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Electro Boutique. Todos los derechos reservados.</p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
