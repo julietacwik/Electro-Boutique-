@@ -38,7 +38,7 @@
 
     .menu-dropdown .container {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
       gap: 20px;
       position: relative;
@@ -47,15 +47,6 @@
       background: rgba(255,255,255,0.62);
       border: 1px solid rgba(255,255,255,0.75);
       box-shadow: var(--shadow-soft);
-    }
-
-    .nav-logo {
-      color: var(--text);
-      text-decoration: none;
-      font-size: 0.98rem;
-      font-weight: 300;
-      letter-spacing: 0.03em;
-      text-transform: none;
     }
 
     .dropdown-btn {
@@ -241,7 +232,6 @@
 <body>
   <nav class="menu-dropdown">
     <div class="container">
-      <a href="index.html" class="nav-logo">Electro Boutique</a>
       <button class="dropdown-btn">Menu</button>
       <ul class="dropdown-menu">
         <li><a href="index.html">Home</a></li>

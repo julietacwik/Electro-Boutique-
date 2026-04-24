@@ -45,7 +45,7 @@
 
     .menu-dropdown .container {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
       gap: 20px;
       position: relative;
@@ -54,15 +54,6 @@
       background: rgba(255,255,255,0.62);
       border: 1px solid rgba(255,255,255,0.75);
       box-shadow: var(--shadow-soft);
-    }
-
-    .nav-logo {
-      color: var(--text);
-      text-decoration: none;
-      font-size: 0.98rem;
-      font-weight: 300;
-      letter-spacing: 0.03em;
-      text-transform: none;
     }
 
     .dropdown-btn {
@@ -114,7 +105,7 @@
     .hero-shell {
       padding: clamp(30px, 6vw, 68px);
       border-radius: 40px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(246,245,243,0.82));
+      background: #ece8e2;
       border: 1px solid rgba(255,255,255,0.82);
       box-shadow: var(--shadow);
     }
@@ -155,17 +146,33 @@
     }
 
     .hero-logo-wrap {
-      padding: 22px;
-      border-radius: 30px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.88), rgba(240,239,237,0.92));
-      border: 1px solid rgba(255,255,255,0.9);
-      box-shadow: var(--shadow-soft);
+      position: relative;
+      padding: clamp(18px, 3vw, 28px);
+      border-radius: 38% 62% 44% 56% / 24% 28% 72% 76%;
+      background: linear-gradient(145deg, rgba(247, 244, 239, 0.85), rgba(232, 226, 217, 0.72));
+      border: 1px solid rgba(255,255,255,0.35);
+      box-shadow: 0 22px 44px rgba(15,15,15,0.045);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .hero-logo-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 8% 10%;
+      border-radius: 42% 58% 48% 52% / 36% 32% 68% 64%;
+      background: radial-gradient(circle at top, rgba(255,255,255,0.5), rgba(255,255,255,0.05) 70%);
+      pointer-events: none;
+      z-index: 0;
     }
 
     .hero-logo {
+      position: relative;
+      z-index: 1;
       width: 100%;
       display: block;
-      border-radius: 20px;
+      border-radius: 0;
+      mix-blend-mode: multiply;
     }
 
     main { padding: 10px 0 90px; }
@@ -332,14 +339,12 @@
         padding: 24px;
       }
 
-      .nav-logo { font-size: 0.95rem; letter-spacing: 0.18em; }
     }
   </style>
 </head>
 <body>
   <nav class="menu-dropdown">
     <div class="container">
-      <a href="index.html" class="nav-logo">Electro Boutique</a>
       <button class="dropdown-btn">Menu</button>
       <ul class="dropdown-menu">
         <li><a href="index.html">Home</a></li>
