@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre Nosotros - Electro Boutique</title>
+  <style>
+    :root {
+      --text: #161616;
+      --muted: #6d6d72;
+      --line: rgba(22, 22, 22, 0.1);
+      --wa: #25d366;
+      --shadow: 0 16px 48px rgba(15, 15, 15, 0.06);
+      --shadow-soft: 0 10px 28px rgba(15, 15, 15, 0.04);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      color: var(--text);
+      line-height: 1.6;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.52), transparent 28%),
+        linear-gradient(180deg, #ddd8d2 0%, #d3cec7 48%, #cbc6c0 100%);
+    }
+
+    .container { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+
+    .menu-dropdown {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 16px 0;
+      background: rgba(246, 245, 243, 0.82);
+      backdrop-filter: blur(12px);
+    }
+
+    .menu-dropdown .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+      padding: 18px 24px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.62);
+      border: 1px solid rgba(255,255,255,0.75);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .nav-logo {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.98rem;
+      font-weight: 300;
+      letter-spacing: 0.03em;
+      text-transform: none;
+    }
+
+    .dropdown-btn {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.72);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 12px 18px;
+      font: inherit;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      text-transform: none;
+      cursor: pointer;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 14px);
+      right: 0;
+      min-width: 240px;
+      list-style: none;
+      padding: 12px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(255,255,255,0.85);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition: 0.25s ease;
+      backdrop-filter: blur(18px);
+    }
+
+    .dropdown-menu.show { opacity: 1; visibility: visible; transform: translateY(0); }
+    .dropdown-menu li + li { margin-top: 6px; }
+    .dropdown-menu a {
+      display: block;
+      text-decoration: none;
+      color: var(--text);
+      padding: 12px 14px;
+      border-radius: 16px;
+      font-weight: 300;
+    }
+
+    .dropdown-menu a:hover { background: #efefee; }
+
+    main { padding: 52px 0 90px; }
+
+    .hero-shell {
+      padding: clamp(30px, 6vw, 68px);
+      border-radius: 40px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(246,245,243,0.82));
+      border: 1px solid rgba(255,255,255,0.82);
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 9px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.72);
+      color: var(--muted);
+      font-size: 0.74rem;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      text-transform: none;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      width: 62px;
+      height: 62px;
+      border-radius: 999px;
+      background: var(--wa);
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 18px 28px rgba(37, 211, 102, 0.28);
+      z-index: 120;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .whatsapp-float:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 32px rgba(37, 211, 102, 0.35);
+    }
+
+    .whatsapp-float svg {
+      width: 30px;
+      height: 30px;
+      display: block;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4.2vw, 3.1rem);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      text-transform: none;
+      margin-bottom: 18px;
+      max-width: 760px;
+      font-weight: 300;
+    }
+
+    .lead {
+      max-width: 700px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      margin-bottom: 28px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+    }
+
+    .about-panel,
+    .values-panel {
+      padding: 28px;
+      border-radius: 30px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(244,243,241,0.96));
+      border: 1px solid rgba(255,255,255,0.86);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .about-panel p + p,
+    .values-panel li + li {
+      margin-top: 14px;
+    }
+
+    .values-panel h2 {
+      font-size: 0.96rem;
+      letter-spacing: 0.03em;
+      text-transform: none;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .values-panel ul {
+      list-style: none;
+    }
+
+    .values-panel li {
+      padding: 14px 0;
+      border-top: 1px solid rgba(22,22,22,0.08);
+    }
+
+    .values-panel li:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    footer { padding: 0 0 42px; }
+    .footer-card {
+      padding: 24px;
+      border-radius: 24px;
+      text-align: center;
+      color: var(--muted);
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(255,255,255,0.72);
+      box-shadow: var(--shadow-soft);
+      letter-spacing: 0.03em;
+      text-transform: none;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 900px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .menu-dropdown .container,
+      .hero-shell {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="menu-dropdown">
+    <div class="container">
+      <a href="index.html" class="nav-logo">Electro Boutique</a>
+      <button class="dropdown-btn">Menu</button>
+      <ul class="dropdown-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="cocina.html">Cocina</a></li>
+        <li><a href="climatizacion.html">Climatizacion</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+      <div class="hero-shell">
+        <div class="eyebrow">Sobre Nosotros</div>
+        <h1>Seleccionamos piezas para hogares que valoran el diseno y la calidad real.</h1>
+        <p class="lead">Electro Boutique nace con una idea clara: ofrecer electrodomesticos y climatizacion de alta gama con una experiencia mas cuidada, cercana y profesional.</p>
+
+        <div class="about-grid">
+          <div class="about-panel">
+            <p>Nos especializamos en productos que combinan tecnologia, durabilidad y una estetica que acompana interiores actuales. Cada recomendacion busca equilibrar rendimiento, presencia visual y compatibilidad con el espacio.</p>
+            <p>Trabajamos con marcas reconocidas y acompanamos a cada cliente antes, durante y despues de la compra, para que elegir bien no sea una complicacion sino una experiencia clara y confiable.</p>
+            <p>Entendemos que un buen electrodomestico no solo resuelve una necesidad: mejora la vida diaria, suma confort y eleva la calidad del hogar en el largo plazo.</p>
+          </div>
+
+          <div class="values-panel">
+            <h2>Nuestro Enfoque</h2>
+            <ul>
+              <li>Asesoramiento personalizado segun tu espacio, estilo y necesidades.</li>
+              <li>Productos premium con una seleccion cuidada y coherente.</li>
+              <li>Acompanamiento real para que cada compra tenga respaldo.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-card">Electro Boutique · Diseno, tecnologia y acompanamiento</div>
+    </div>
+  </footer>
+
+  <a class="whatsapp-float" href="https://wa.me/5491131303223?text=Hola%2C%20estoy%20interesado%20en%20los%20productos" target="_blank" aria-label="Abrir WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M20.52 3.48A11.86 11.86 0 0 0 12.07 0C5.5 0 .16 5.35.16 11.91c0 2.1.55 4.15 1.6 5.95L0 24l6.31-1.65a11.88 11.88 0 0 0 5.76 1.47h.01c6.56 0 11.9-5.35 11.9-11.91 0-3.18-1.24-6.16-3.46-8.43Zm-8.45 18.3h-.01a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.74.98 1-3.65-.24-.38a9.87 9.87 0 0 1-1.51-5.23C2.17 6.45 6.61 2 12.07 2c2.63 0 5.1 1.03 6.96 2.89a9.79 9.79 0 0 1 2.88 6.97c0 5.46-4.45 9.91-9.84 9.91Zm5.43-7.41c-.3-.15-1.77-.87-2.05-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47a8.92 8.92 0 0 1-1.65-2.05c-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.48-.5-.67-.5h-.57c-.2 0-.52.08-.8.37-.27.3-1.05 1.02-1.05 2.5 0 1.47 1.08 2.9 1.23 3.1.15.2 2.12 3.24 5.13 4.54.72.31 1.29.5 1.72.64.72.23 1.37.2 1.89.12.58-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z"/>
+    </svg>
+  </a>
+
+  <script>
+    const button = document.querySelector('.dropdown-btn');
+    const menu = document.querySelector('.dropdown-menu');
+
+    button.addEventListener('click', function() {
+      menu.classList.toggle('show');
+    });
+
+    document.addEventListener('click', function(event) {
+      if (!event.target.closest('.menu-dropdown')) {
+        menu.classList.remove('show');
+      }
+    });
+  </script>
+</body>
+</html>
