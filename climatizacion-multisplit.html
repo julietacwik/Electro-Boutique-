@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multisplit - Electro Boutique</title>
+  <style>
+    :root {
+      --panel: rgba(255, 255, 255, 0.82);
+      --text: #161616;
+      --muted: #6d6d72;
+      --line: rgba(22, 22, 22, 0.1);
+      --shadow: 0 16px 48px rgba(15, 15, 15, 0.06);
+      --shadow-soft: 0 10px 28px rgba(15, 15, 15, 0.04);
+      --wa: #25d366;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      color: var(--text);
+      line-height: 1.5;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.52), transparent 28%),
+        linear-gradient(180deg, #ddd8d2 0%, #d3cec7 48%, #cbc6c0 100%);
+    }
+
+    .container { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+
+    .menu-dropdown {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 16px 0;
+      background: rgba(246, 245, 243, 0.82);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.5);
+    }
+
+    .menu-dropdown .container {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      position: relative;
+      padding: 18px 24px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.62);
+      border: 1px solid rgba(255,255,255,0.75);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .dropdown-btn {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.72);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 12px 18px;
+      font: inherit;
+      font-weight: 300;
+      cursor: pointer;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 14px);
+      right: 0;
+      min-width: 240px;
+      list-style: none;
+      padding: 12px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(255,255,255,0.85);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition: 0.25s ease;
+      backdrop-filter: blur(18px);
+    }
+
+    .dropdown-menu.show { opacity: 1; visibility: visible; transform: translateY(0); }
+    .dropdown-menu li + li { margin-top: 6px; }
+
+    .dropdown-menu a {
+      display: block;
+      text-decoration: none;
+      color: var(--text);
+      padding: 12px 14px;
+      border-radius: 16px;
+      font-weight: 300;
+    }
+
+    .dropdown-menu a:hover { background: #efefee; }
+
+    main { padding: 52px 0 90px; }
+
+    .hero-shell,
+    .section-card,
+    .footer-card {
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,0.78);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-shell {
+      padding: clamp(30px, 6vw, 68px);
+      border-radius: 40px;
+      margin-bottom: 28px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 9px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.72);
+      color: var(--muted);
+      font-size: 0.74rem;
+      font-weight: 300;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+    }
+
+    .lead {
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.04rem;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 18px;
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(22,22,22,0.2);
+      padding-bottom: 2px;
+    }
+
+    .section-card {
+      padding: 34px;
+      border-radius: 34px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .section-head h2 {
+      font-size: clamp(1.34rem, 2vw, 1.85rem);
+      font-weight: 300;
+      letter-spacing: -0.025em;
+    }
+
+    .section-head span {
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 300;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .item {
+      border-radius: 26px;
+      border: 1px solid rgba(255,255,255,0.86);
+      background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(244,243,241,0.96));
+      padding: 26px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .item-number {
+      margin-bottom: 14px;
+      color: var(--muted);
+      font-size: 0.74rem;
+      font-weight: 300;
+    }
+
+    .image-frame {
+      width: 100%;
+      height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.78);
+      margin-bottom: 18px;
+      padding: 14px;
+    }
+
+    .image-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+    }
+
+    .item h3 {
+      font-size: 1.28rem;
+      font-weight: 300;
+      margin-bottom: 10px;
+    }
+
+    .item p {
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    footer { padding: 0 0 42px; }
+
+    .footer-card {
+      padding: 24px;
+      border-radius: 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      width: 62px;
+      height: 62px;
+      border-radius: 999px;
+      background: var(--wa);
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 18px 28px rgba(37, 211, 102, 0.28);
+      z-index: 120;
+      text-decoration: none;
+    }
+
+    .whatsapp-float svg {
+      width: 30px;
+      height: 30px;
+      display: block;
+    }
+
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+      .image-frame { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="menu-dropdown">
+    <div class="container">
+      <button class="dropdown-btn">☰ Menu</button>
+      <ul class="dropdown-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="cocina.html">Cocina</a></li>
+        <li><a href="climatizacion.html">Climatizacion</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="sobre-nosotros.html">Sobre nosotros</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+      <section class="hero-shell">
+        <div class="eyebrow">Climatizacion</div>
+        <h1>Multisplit</h1>
+        <p class="lead">Dos opciones multisplit para resolver varios ambientes con una presencia prolija, terminaciones cuidadas y las imágenes completas dentro del mismo formato visual.</p>
+        <a href="climatizacion.html" class="back-link">Volver a climatizacion</a>
+      </section>
+
+      <section class="section-card">
+        <div class="section-head">
+          <h2>Opciones disponibles</h2>
+          <span>2 equipos</span>
+        </div>
+
+        <div class="grid">
+          <article class="item">
+            <div class="item-number">Opcion 01</div>
+            <div class="image-frame">
+              <img src="multisplit 1 2.jpeg" alt="Equipo multisplit Hisense">
+            </div>
+            <h3>Hisense Multisplit</h3>
+            <p>Sistema multisplit con varias unidades interiores y presencia limpia para proyectos residenciales de alta gama.</p>
+          </article>
+
+          <article class="item">
+            <div class="item-number">Opcion 02</div>
+            <div class="image-frame">
+              <img src="multisplit 2.PNG" alt="Equipo multisplit LG">
+            </div>
+            <h3>LG Multisplit Inverter</h3>
+            <p>Alternativa inverter con control independiente por ambiente y una estetica sobria pensada para integrarse mejor.</p>
+          </article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-card">Electro Boutique · Climatizacion premium para espacios exigentes</div>
+    </div>
+  </footer>
+
+  <a class="whatsapp-float" href="https://wa.me/5491131303223?text=Hola%2C%20estoy%20interesado%20en%20los%20productos" target="_blank" aria-label="Abrir WhatsApp">
+    <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+      <path d="M19.11 17.23c-.29-.15-1.73-.85-2-.95-.27-.1-.47-.15-.67.15-.19.29-.76.94-.93 1.14-.17.19-.34.22-.63.07-.29-.15-1.24-.46-2.36-1.47-.88-.79-1.47-1.76-1.64-2.05-.17-.29-.02-.45.13-.6.13-.13.29-.34.44-.51.15-.17.19-.29.29-.49.1-.19.05-.36-.02-.51-.07-.15-.67-1.62-.92-2.22-.24-.58-.48-.5-.67-.51h-.57c-.19 0-.51.07-.78.36-.27.29-1.02 1-1.02 2.44 0 1.44 1.05 2.83 1.19 3.02.15.19 2.06 3.14 5 4.4.7.3 1.25.48 1.68.62.7.22 1.34.19 1.84.12.56-.08 1.73-.71 1.97-1.39.24-.68.24-1.26.17-1.39-.07-.12-.27-.19-.56-.34zM16.03 3.2c-7.07 0-12.8 5.73-12.8 12.8 0 2.25.59 4.45 1.71 6.39L3 29l6.79-1.78c1.87 1.02 3.97 1.56 6.24 1.56h.01c7.07 0 12.8-5.73 12.8-12.8S23.1 3.2 16.03 3.2zm0 23.28h-.01c-2 0-3.96-.54-5.67-1.56l-.41-.24-4.03 1.06 1.08-3.93-.27-.41c-1.06-1.68-1.62-3.63-1.62-5.62 0-5.95 4.84-10.8 10.8-10.8 2.88 0 5.58 1.12 7.62 3.16 2.04 2.04 3.16 4.74 3.16 7.63 0 5.96-4.85 10.8-10.8 10.8z"/>
+    </svg>
+  </a>
+
+  <script>
+    document.querySelector('.dropdown-btn').addEventListener('click', function() {
+      document.querySelector('.dropdown-menu').classList.toggle('show');
+    });
+  </script>
+</body>
+</html>
