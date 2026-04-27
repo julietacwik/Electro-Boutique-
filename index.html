@@ -137,6 +137,50 @@
       background: #efefee;
     }
 
+    .submenu-group {
+      border-radius: 16px;
+    }
+
+    .submenu-group summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text);
+      padding: 12px 14px;
+      border-radius: 16px;
+      font-weight: 300;
+    }
+
+    .submenu-group summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .submenu-group summary::after {
+      content: "▾";
+      font-size: 0.78rem;
+      color: var(--muted);
+      transition: transform 0.2s ease;
+    }
+
+    .submenu-group[open] summary::after {
+      transform: rotate(180deg);
+    }
+
+    .submenu-group summary:hover {
+      background: #efefee;
+    }
+
+    .submenu {
+      list-style: none;
+      padding: 4px 0 0 12px;
+    }
+
+    .submenu li + li {
+      margin-top: 4px;
+    }
+
     header {
       padding: 52px 0 30px;
     }
@@ -596,17 +640,34 @@
   </style>
 </head>
 <body>
-  <nav class="menu-dropdown">
+    <nav class="menu-dropdown">
     <div class="container">
       <button class="dropdown-btn">Menu</button>
       <ul class="dropdown-menu">
-        <li><a href="cocina.html">Cocina</a></li>
-        <li><a href="climatizacion.html">Climatizacion</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><details class="submenu-group">
+          <summary>Cocina</summary>
+          <ul class="submenu">
+            <li><a href="cocina.html">Ver cocina</a></li>
+            <li><a href="cocina-bosch.html">↳ Bosch</a></li>
+            <li><a href="cocina-samsung.html">↳ Samsung</a></li>
+          </ul>
+        </details></li>
+        <li><details class="submenu-group">
+          <summary>Climatizacion</summary>
+          <ul class="submenu">
+            <li><a href="climatizacion.html">Ver climatizacion</a></li>
+            <li><a href="climatizacion-multisplit.html">↳ Multisplit</a></li>
+            <li><a href="climatizacion-piso-techo.html">↳ Piso techo</a></li>
+            <li><a href="climatizacion-baja-silueta.html">↳ Baja silueta</a></li>
+          </ul>
+        </details></li>
         <li><a href="contacto.html">Contacto</a></li>
-        <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+        <li><a href="sobre-nosotros.html">Sobre nosotros</a></li>
       </ul>
     </div>
   </nav>
+
 
   <header>
     <div class="container">
