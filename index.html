@@ -439,21 +439,15 @@
     .carousel-track {
       display: flex;
       gap: 18px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
       padding: 4px 2px 12px;
-      scrollbar-width: none;
-    }
-
-    .carousel-track::-webkit-scrollbar {
-      display: none;
+      touch-action: pan-y;
+      user-select: none;
+      will-change: transform;
     }
 
     .featured-card {
       flex: 0 0 calc((100% - 36px) / 3);
       min-width: 0;
-      scroll-snap-align: start;
       padding: 18px;
       border-radius: 28px;
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(244, 243, 241, 0.98));
@@ -751,40 +745,115 @@
       }
     });
 
-    const getStep = () => {
-      const card = track.querySelector('.featured-card');
-      if (!card) return 0;
-      const gap = 18;
-      return card.getBoundingClientRect().width + gap;
-    };
+    if (track && prev && next) {
+      const originals = Array.from(track.querySelectorAll('.featured-card'));
+      const cloneCard = (card) => {
+        const clone = card.cloneNode(true);
+        clone.classList.add('featured-clone');
+        clone.setAttribute('aria-hidden', 'true');
+        return clone;
+      };
 
-    prev.addEventListener('click', function() {
-      const step = getStep();
-      if (!step) return;
-      const maxScroll = track.scrollWidth - track.clientWidth;
-      const isAtStart = track.scrollLeft <= step * 0.25;
+      const before = document.createDocumentFragment();
+      const after = document.createDocumentFragment();
+      originals.forEach((card) => before.appendChild(cloneCard(card)));
+      originals.forEach((card) => after.appendChild(cloneCard(card)));
+      track.prepend(before);
+      track.appendChild(after);
 
-      if (isAtStart) {
-        track.scrollTo({ left: maxScroll, behavior: 'smooth' });
-        return;
-      }
+      const cards = Array.from(track.querySelectorAll('.featured-card'));
+      const totalOriginals = originals.length;
+      let currentIndex = totalOriginals;
+      let step = 0;
+      let isDragging = false;
+      let dragStartX = 0;
+      let dragDeltaX = 0;
+      let startTranslate = 0;
 
-      track.scrollBy({ left: -step, behavior: 'smooth' });
-    });
+      const measureStep = () => {
+        const card = cards[0];
+        if (!card) return 0;
+        const styles = window.getComputedStyle(track);
+        const gap = parseFloat(styles.columnGap || styles.gap || 18);
+        return card.getBoundingClientRect().width + gap;
+      };
 
-    next.addEventListener('click', function() {
-      const step = getStep();
-      if (!step) return;
-      const maxScroll = track.scrollWidth - track.clientWidth;
-      const isAtEnd = track.scrollLeft >= maxScroll - step * 0.25;
+      const getTranslateForIndex = (index) => -(index * step);
 
-      if (isAtEnd) {
-        track.scrollTo({ left: 0, behavior: 'smooth' });
-        return;
-      }
+      const applyTranslate = (value, withTransition) => {
+        track.style.transition = withTransition ? 'transform 0.42s cubic-bezier(0.22, 1, 0.36, 1)' : 'none';
+        track.style.transform = `translate3d(${value}px, 0, 0)`;
+      };
 
-      track.scrollBy({ left: step, behavior: 'smooth' });
-    });
+      const snapToIndex = (index, withTransition = true) => {
+        currentIndex = index;
+        applyTranslate(getTranslateForIndex(currentIndex), withTransition);
+      };
+
+      const normalizeLoop = () => {
+        if (currentIndex >= totalOriginals * 2) {
+          currentIndex -= totalOriginals;
+          applyTranslate(getTranslateForIndex(currentIndex), false);
+        } else if (currentIndex < totalOriginals) {
+          currentIndex += totalOriginals;
+          applyTranslate(getTranslateForIndex(currentIndex), false);
+        }
+      };
+
+      const moveBy = (direction) => {
+        if (!step) return;
+        snapToIndex(currentIndex + direction, true);
+      };
+
+      const onPointerDown = (event) => {
+        if (!step) return;
+        isDragging = true;
+        dragStartX = event.clientX;
+        dragDeltaX = 0;
+        startTranslate = getTranslateForIndex(currentIndex);
+        track.style.transition = 'none';
+      };
+
+      const onPointerMove = (event) => {
+        if (!isDragging) return;
+        dragDeltaX = event.clientX - dragStartX;
+        applyTranslate(startTranslate + dragDeltaX, false);
+      };
+
+      const onPointerUp = () => {
+        if (!isDragging) return;
+        isDragging = false;
+        const threshold = Math.min(140, step * 0.22);
+
+        if (Math.abs(dragDeltaX) > threshold) {
+          moveBy(dragDeltaX < 0 ? 1 : -1);
+        } else {
+          snapToIndex(currentIndex, true);
+        }
+      };
+
+      const setupCarousel = () => {
+        step = measureStep();
+        snapToIndex(totalOriginals, false);
+      };
+
+      requestAnimationFrame(setupCarousel);
+      window.addEventListener('resize', setupCarousel);
+      track.addEventListener('transitionend', normalizeLoop);
+
+      prev.addEventListener('click', function() {
+        moveBy(-1);
+      });
+
+      next.addEventListener('click', function() {
+        moveBy(1);
+      });
+
+      track.addEventListener('pointerdown', onPointerDown);
+      window.addEventListener('pointermove', onPointerMove);
+      window.addEventListener('pointerup', onPointerUp);
+      window.addEventListener('pointercancel', onPointerUp);
+    }
 
   </script>
 </body>
