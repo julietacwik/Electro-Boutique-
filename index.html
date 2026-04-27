@@ -426,32 +426,6 @@
       color: #1247a6;
     }
 
-    .intro-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      margin-top: 18px;
-    }
-
-    .intro-tile {
-      padding: 26px 24px;
-      border-radius: 24px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(244, 243, 241, 0.98));
-      border: 1px solid rgba(255, 255, 255, 0.92);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .intro-tile h3 {
-      font-size: 1.08rem;
-      letter-spacing: -0.03em;
-      text-transform: none;
-      margin-bottom: 10px;
-      font-weight: 400;
-    }
-
-    .intro-tile p {
-      color: var(--muted);
-      font-size: 0.97rem;
-    }
-
     .carousel-wrap {
       position: relative;
       margin-top: 8px;
@@ -485,16 +459,20 @@
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(244, 243, 241, 0.98));
       border: 1px solid rgba(255, 255, 255, 0.92);
       box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
     }
 
     .featured-card img {
       width: 100%;
       height: 250px;
-      object-fit: cover;
+      object-fit: contain;
       border-radius: 20px;
       display: block;
       background: #f4f3f1;
       margin-bottom: 16px;
+      padding: 12px;
     }
 
     .featured-meta {
@@ -600,8 +578,7 @@
     }
 
     @media (max-width: 900px) {
-      .grid.two,
-      .intro-grid {
+      .grid.two {
         grid-template-columns: 1fr;
       }
 
@@ -665,79 +642,66 @@
       <section>
         <div class="section-card">
           <div class="section-head">
-            <h2>Curaduria premium</h2>
-            <span>Seleccion Electro Boutique</span>
-          </div>
-
-          <div class="grid intro-grid">
-            <article class="intro-tile">
-              <h3>Diseno sobrio</h3>
-              <p>Una identidad mas limpia, luminosa y elegante para acompañar el lenguaje visual del logo.</p>
-            </article>
-            <article class="intro-tile">
-              <h3>Marcas lideres</h3>
-              <p>Bosch, Samsung y climatizacion premium seleccionada para proyectos con criterio estetico y tecnico.</p>
-            </article>
-            <article class="intro-tile">
-              <h3>Asesoria real</h3>
-              <p>Te acompañamos para elegir productos que se vean bien, funcionen mejor y duren en el tiempo.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div class="section-card">
-          <div class="section-head">
             <h2 id="destacados">Productos destacados</h2>
-            <span>Home selection</span>
+            <span>Seleccion actual</span>
           </div>
 
           <div class="carousel-wrap">
             <div class="carousel-viewport">
               <div class="carousel-track" id="featured-track">
                 <article class="featured-card">
-                  <img src="horno.jpeg" alt="Horno Bosch Serie 8" onerror="this.style.display='none'">
+                  <img src="horno 2.PNG" alt="Horno Bosch Serie 8 inox">
                   <div class="featured-meta">
                     <span>Bosch</span>
-                    <span>Cocina</span>
+                    <span>Hornos</span>
                   </div>
-                  <h3>Horno Serie 8</h3>
-                  <p>Coccion precisa, limpieza pirolitica y una estetica empotrable perfecta para cocinas premium.</p>
-                  <a href="cocina.html" class="featured-link">Ver cocina</a>
+                  <h3>Horno Bosch Serie 8 inox</h3>
+                  <p>Modelo de acero inoxidable con panel digital superior y mandos precisos, pensado para cocinar, gratinar y hornear con muy buena uniformidad.</p>
+                  <a href="cocina-bosch-hornos.html" class="featured-link">Ver hornos Bosch</a>
                 </article>
 
                 <article class="featured-card">
-                  <img src="WhatsApp Image 2026-04-20 at 7.25.23 PM.jpeg" alt="Heladera Samsung Bespoke" onerror="this.style.display='none'">
+                  <img src="anafe 1.PNG" alt="Anafe Bosch a gas 5 hornallas">
                   <div class="featured-meta">
-                    <span>Samsung</span>
-                    <span>Cocina</span>
+                    <span>Bosch</span>
+                    <span>Anafes</span>
                   </div>
-                  <h3>Heladera Bespoke</h3>
-                  <p>Diseño sofisticado, modularidad y tecnología inteligente para una cocina visualmente impecable.</p>
-                  <a href="cocina.html" class="featured-link">Ver cocina</a>
+                  <h3>Anafe a gas 5 hornallas</h3>
+                  <p>Anafe de acero inoxidable con cinco quemadores y quemador central de alta potencia, ideal para cocinar varias preparaciones al mismo tiempo.</p>
+                  <a href="cocina-bosch-anafes.html" class="featured-link">Ver anafes Bosch</a>
                 </article>
 
                 <article class="featured-card">
-                  <img src="aire acondicionado 2.jpeg" alt="Aire LG Multisplit" onerror="this.style.display='none'">
+                  <img src="campana 1.JPG" alt="Campana Bosch inox de pared">
+                  <div class="featured-meta">
+                    <span>Bosch</span>
+                    <span>Campanas</span>
+                  </div>
+                  <h3>Campana Bosch inox de pared</h3>
+                  <p>Campana decorativa con frente recto, iluminación integrada y filtros metálicos, pensada para una extracción eficiente y una presencia visual limpia.</p>
+                  <a href="cocina-bosch-campana.html" class="featured-link">Ver campanas Bosch</a>
+                </article>
+
+                <article class="featured-card">
+                  <img src="multisplit 1 2.jpeg" alt="Multisplit LG Artcool">
                   <div class="featured-meta">
                     <span>LG</span>
                     <span>Climatizacion</span>
                   </div>
-                  <h3>Multisplit Artcool</h3>
-                  <p>Versatil, elegante y pensado para climatizar varios ambientes con una sola unidad exterior.</p>
-                  <a href="climatizacion.html" class="featured-link">Ver climatizacion</a>
+                  <h3>Multisplit LG Artcool</h3>
+                  <p>Sistema multisplit pensado para climatizar varios ambientes con una sola unidad exterior, con una presencia moderna y elegante.</p>
+                  <a href="climatizacion-multisplit.html" class="featured-link">Ver multisplit</a>
                 </article>
 
                 <article class="featured-card">
-                  <img src="aire acondicionado 1 .jpeg" alt="Aire Piso Techo Philco" onerror="this.style.display='none'">
+                  <img src="piso techo 1 .jpeg" alt="Piso techo Philco 18.000 frigorias Inverter 6TR">
                   <div class="featured-meta">
                     <span>Philco</span>
                     <span>Climatizacion</span>
                   </div>
-                  <h3>Piso Techo Inverter</h3>
-                  <p>Un equipo de alto rendimiento para espacios amplios, con presencia sobria y terminacion cuidada.</p>
-                  <a href="climatizacion.html" class="featured-link">Ver climatizacion</a>
+                  <h3>Piso techo Philco 18.000 frigorias Inverter 6TR</h3>
+                  <p>Equipo ideal para climatizar ambientes amplios de forma eficiente y uniforme, con instalacion flexible para piso o techo.</p>
+                  <a href="climatizacion-piso-techo-philco.html" class="featured-link">Ver piso techo</a>
                 </article>
               </div>
             </div>
@@ -795,12 +759,33 @@
     };
 
     prev.addEventListener('click', function() {
-      track.scrollBy({ left: -getStep(), behavior: 'smooth' });
+      const step = getStep();
+      if (!step) return;
+      const maxScroll = track.scrollWidth - track.clientWidth;
+      const isAtStart = track.scrollLeft <= step * 0.25;
+
+      if (isAtStart) {
+        track.scrollTo({ left: maxScroll, behavior: 'smooth' });
+        return;
+      }
+
+      track.scrollBy({ left: -step, behavior: 'smooth' });
     });
 
     next.addEventListener('click', function() {
-      track.scrollBy({ left: getStep(), behavior: 'smooth' });
+      const step = getStep();
+      if (!step) return;
+      const maxScroll = track.scrollWidth - track.clientWidth;
+      const isAtEnd = track.scrollLeft >= maxScroll - step * 0.25;
+
+      if (isAtEnd) {
+        track.scrollTo({ left: 0, behavior: 'smooth' });
+        return;
+      }
+
+      track.scrollBy({ left: step, behavior: 'smooth' });
     });
+
   </script>
 </body>
 </html>
