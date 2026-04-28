@@ -9,6 +9,8 @@
       --text: #161616;
       --muted: #6d6d72;
       --line: rgba(22, 22, 22, 0.1);
+      --beige: #ddd0be;
+      --beige-soft: #eee4d6;
       --wa: #25d366;
       --shadow: 0 16px 48px rgba(15, 15, 15, 0.06);
       --shadow-soft: 0 10px 28px rgba(15, 15, 15, 0.04);
@@ -105,11 +107,32 @@
     main { padding: 52px 0 90px; }
 
     .hero-shell {
+      position: relative;
       padding: clamp(30px, 6vw, 68px);
       border-radius: 40px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(246,245,243,0.82));
+      background:
+        radial-gradient(circle at top right, rgba(255,255,255,0.74), transparent 30%),
+        linear-gradient(145deg, rgba(245,239,231,0.96), rgba(231,223,213,0.9));
       border: 1px solid rgba(255,255,255,0.82);
       box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-shell::before {
+      content: "";
+      position: absolute;
+      top: -80px;
+      right: -60px;
+      width: 280px;
+      height: 280px;
+      border-radius: 38% 62% 58% 42%;
+      background: radial-gradient(circle, rgba(221, 208, 190, 0.5), rgba(221, 208, 190, 0.06) 68%, transparent 72%);
+      pointer-events: none;
+    }
+
+    .hero-shell > * {
+      position: relative;
+      z-index: 1;
     }
 
     .eyebrow {
@@ -170,6 +193,35 @@
       margin-bottom: 28px;
     }
 
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 26px;
+    }
+
+    .metric-card {
+      padding: 22px 20px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.72), rgba(238,228,214,0.72));
+      border: 1px solid rgba(255,255,255,0.82);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .metric-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.76rem;
+      margin-bottom: 8px;
+    }
+
+    .metric-card strong {
+      display: block;
+      font-size: 1.02rem;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+    }
+
     .about-grid {
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
@@ -180,14 +232,40 @@
     .values-panel {
       padding: 28px;
       border-radius: 30px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(244,243,241,0.96));
+      background:
+        linear-gradient(180deg, rgba(255,248,240,0.96), rgba(240,232,221,0.96));
       border: 1px solid rgba(255,255,255,0.86);
       box-shadow: var(--shadow-soft);
+    }
+
+    .about-panel {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-panel::after {
+      content: "";
+      position: absolute;
+      inset: auto -18% -28% 40%;
+      height: 180px;
+      background: radial-gradient(circle, rgba(255,255,255,0.45), transparent 70%);
+      pointer-events: none;
     }
 
     .about-panel p + p,
     .values-panel li + li {
       margin-top: 14px;
+    }
+
+    .highlight-quote {
+      margin-top: 24px;
+      padding: 20px 22px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(243,233,219,0.92), rgba(236,225,210,0.9));
+      border: 1px solid rgba(255,255,255,0.86);
+      color: var(--text);
+      font-size: 1.02rem;
+      letter-spacing: -0.01em;
     }
 
     .values-panel h2 {
@@ -212,6 +290,13 @@
       padding-top: 0;
     }
 
+    .values-panel li strong {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 300;
+      color: var(--text);
+    }
+
     footer { padding: 0 0 42px; }
     .footer-card {
       padding: 24px;
@@ -227,6 +312,7 @@
     }
 
     @media (max-width: 900px) {
+      .hero-metrics,
       .about-grid {
         grid-template-columns: 1fr;
       }
@@ -275,19 +361,35 @@
         <h1>Seleccionamos piezas para hogares que valoran el diseno y la calidad real.</h1>
         <p class="lead">Electro Boutique nace con una idea clara: ofrecer electrodomesticos y climatizacion de alta gama con una experiencia mas cuidada, cercana y profesional.</p>
 
+        <div class="hero-metrics">
+          <div class="metric-card">
+            <span>Curaduria</span>
+            <strong>Seleccion pensada para proyectos y hogares exigentes.</strong>
+          </div>
+          <div class="metric-card">
+            <span>Acompanamiento</span>
+            <strong>Asesoramiento real antes, durante y despues de cada compra.</strong>
+          </div>
+          <div class="metric-card">
+            <span>Estilo</span>
+            <strong>Tecnologia y presencia visual en una misma propuesta.</strong>
+          </div>
+        </div>
+
         <div class="about-grid">
           <div class="about-panel">
             <p>Nos especializamos en productos que combinan tecnologia, durabilidad y una estetica que acompana interiores actuales. Cada recomendacion busca equilibrar rendimiento, presencia visual y compatibilidad con el espacio.</p>
             <p>Trabajamos con marcas reconocidas y acompanamos a cada cliente antes, durante y despues de la compra, para que elegir bien no sea una complicacion sino una experiencia clara y confiable.</p>
             <p>Entendemos que un buen electrodomestico no solo resuelve una necesidad: mejora la vida diaria, suma confort y eleva la calidad del hogar en el largo plazo.</p>
+            <div class="highlight-quote">Creemos en una seleccion mas cuidada, donde cada equipo aporte funcionalidad, diseno y una sensacion de calidad que se nota todos los dias.</div>
           </div>
 
           <div class="values-panel">
             <h2>Nuestro Enfoque</h2>
             <ul>
-              <li>Asesoramiento personalizado segun tu espacio, estilo y necesidades.</li>
-              <li>Productos premium con una seleccion cuidada y coherente.</li>
-              <li>Acompanamiento real para que cada compra tenga respaldo.</li>
+              <li><strong>Asesoramiento personalizado</strong>Segun tu espacio, estilo y necesidades.</li>
+              <li><strong>Seleccion coherente</strong>Productos premium elegidos con criterio visual y tecnico.</li>
+              <li><strong>Respaldo real</strong>Acompanamiento para que cada compra se sienta segura y bien resuelta.</li>
             </ul>
           </div>
         </div>
