@@ -6,10 +6,10 @@
   <title>Piso techo Siam | Electro Boutique</title>
   <style>
     :root {
-      --panel: rgba(255, 255, 255, 0.82);
-      --text: #161616;
-      --muted: #6d6d72;
-      --line: rgba(22, 22, 22, 0.1);
+      --panel: rgba(63, 57, 52, 0.92);
+      --text: #e7d7c2;
+      --muted: #c8b59d;
+      --line: rgba(231, 215, 194, 0.16);
       --shadow: 0 16px 48px rgba(15, 15, 15, 0.06);
       --shadow-soft: 0 10px 28px rgba(15, 15, 15, 0.04);
       --wa: #25d366;
@@ -27,14 +27,14 @@
     }
 
     .container { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
-    .menu-dropdown { position: sticky; top: 0; z-index: 100; padding: 16px 0; background: rgba(246, 245, 243, 0.82); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.5); }
-    .menu-dropdown .container { display: flex; justify-content: flex-end; align-items: center; position: relative; padding: 18px 24px; border-radius: 999px; background: rgba(255,255,255,0.62); border: 1px solid rgba(255,255,255,0.75); box-shadow: var(--shadow-soft); }
-    .dropdown-btn { border: 1px solid var(--line); background: rgba(255,255,255,0.72); color: var(--text); border-radius: 999px; padding: 12px 18px; font: inherit; font-weight: 300; cursor: pointer; }
-    .dropdown-menu { position: absolute; top: calc(100% + 14px); right: 0; min-width: 240px; list-style: none; padding: 12px; border-radius: 24px; background: rgba(255,255,255,0.92); border: 1px solid rgba(255,255,255,0.85); box-shadow: var(--shadow); opacity: 0; visibility: hidden; transform: translateY(-8px); transition: 0.25s ease; backdrop-filter: blur(18px); }
+    .menu-dropdown { position: sticky; top: 0; z-index: 100; padding: 16px 0; background: rgba(72,66,61,0.84); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(231,215,194,0.12); }
+    .menu-dropdown .container { display: flex; justify-content: flex-end; align-items: center; position: relative; padding: 18px 24px; border-radius: 999px; background: rgba(56,51,47,0.9); border: 1px solid rgba(231,215,194,0.16); box-shadow: var(--shadow-soft); }
+    .dropdown-btn { border: 1px solid var(--line); background: rgba(91,82,75,0.95); color: var(--text); border-radius: 999px; padding: 12px 18px; font: inherit; font-weight: 300; cursor: pointer; }
+    .dropdown-menu { position: absolute; top: calc(100% + 14px); right: 0; min-width: 240px; list-style: none; padding: 12px; border-radius: 24px; background: rgba(63,57,52,0.92); border: 1px solid rgba(231,215,194,0.16); box-shadow: var(--shadow); opacity: 0; visibility: hidden; transform: translateY(-8px); transition: 0.25s ease; backdrop-filter: blur(18px); }
     .dropdown-menu.show { opacity: 1; visibility: visible; transform: translateY(0); }
     .dropdown-menu li + li { margin-top: 6px; }
     .dropdown-menu a { display: block; text-decoration: none; color: var(--text); padding: 12px 14px; border-radius: 16px; font-weight: 300; }
-    .dropdown-menu a:hover { background: #efefee; }
+    .dropdown-menu a:hover { background: rgba(231,215,194,0.08); }
     .submenu-group { border-radius: 16px; }
     .submenu-group summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; color: var(--text); padding: 12px 14px; border-radius: 16px; font-weight: 300; }
     .submenu-group summary::-webkit-details-marker { display: none; }
@@ -45,10 +45,10 @@
     .submenu li + li { margin-top: 4px; }
 
     main { padding: 52px 0 90px; }
-    .hero-shell, .section-card, .footer-card { background: var(--panel); border: 1px solid rgba(255,255,255,0.78); box-shadow: var(--shadow); }
+    .hero-shell, .section-card, .footer-card { background: var(--panel); border: 1px solid rgba(231,215,194,0.16); box-shadow: var(--shadow); }
     .hero-shell { padding: clamp(30px, 6vw, 68px); border-radius: 40px; margin-bottom: 28px; }
     .back-arrow { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 18px; color: var(--text); text-decoration: none; font-size: 0.95rem; font-weight: 300; }
-    .eyebrow { display: inline-block; margin-bottom: 14px; padding: 9px 16px; border-radius: 999px; background: rgba(255,255,255,0.72); color: var(--muted); font-size: 0.74rem; font-weight: 300; }
+    .eyebrow { display: inline-block; margin-bottom: 14px; padding: 9px 16px; border-radius: 999px; background: rgba(91,82,75,0.95); color: var(--text); font-size: 0.74rem; font-weight: 300; }
     h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; letter-spacing: -0.03em; margin-bottom: 14px; }
     .lead { max-width: 760px; color: var(--muted); font-size: 1.04rem; }
     .section-card { padding: 34px; border-radius: 34px; }
@@ -59,7 +59,7 @@
     .feature-list { list-style: none; display: grid; gap: 10px; margin-top: 18px; }
     .feature-list li { color: var(--text); font-size: 1rem; }
     .service-note { margin-top: 24px; color: var(--muted); font-size: 1rem; }
-    .image-frame { width: 100%; max-width: 640px; height: 320px; display: flex; align-items: center; justify-content: center; border-radius: 22px; background: #4b443e; margin: 0 auto 24px; padding: 18px; box-shadow: none; }
+    .image-frame { width: 100%; max-width: 560px; height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 22px; background: #4b443e; margin: 0 auto 24px; padding: 0; box-shadow: none; border: none; overflow: hidden; }
     .image-frame img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
     .caption { margin-top: 12px; color: var(--muted); font-size: 0.95rem; }
     .helper { margin-bottom: 18px; color: var(--muted); font-size: 0.95rem; }
@@ -136,7 +136,7 @@
         <div class="gallery">
           <figure class="slide">
             <div class="image-frame">
-              <img src="pt-2a-final.png" alt="Piso techo Siam vista principal">
+              <img src="PT A1.png" alt="Piso techo Siam vista principal">
             </div>
             <figcaption class="caption">Vista principal.</figcaption>
           </figure>

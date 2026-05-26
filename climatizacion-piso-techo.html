@@ -6,10 +6,10 @@
   <title>Piso Techo - Electro Boutique</title>
   <style>
     :root {
-      --panel: rgba(255, 255, 255, 0.82);
-      --text: #161616;
-      --muted: #6d6d72;
-      --line: rgba(22, 22, 22, 0.1);
+      --panel: rgba(63, 57, 52, 0.92);
+      --text: #e7d7c2;
+      --muted: #c8b59d;
+      --line: rgba(231, 215, 194, 0.16);
       --shadow: 0 16px 48px rgba(15, 15, 15, 0.06);
       --shadow-soft: 0 10px 28px rgba(15, 15, 15, 0.04);
       --wa: #25d366;
@@ -27,18 +27,18 @@
     }
 
     .container { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
-    .menu-dropdown { position: sticky; top: 0; z-index: 100; padding: 16px 0; background: rgba(246, 245, 243, 0.82); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.5); }
-    .menu-dropdown .container { display: flex; justify-content: flex-end; align-items: center; position: relative; padding: 18px 24px; border-radius: 999px; background: rgba(255,255,255,0.62); border: 1px solid rgba(255,255,255,0.75); box-shadow: var(--shadow-soft); }
-    .dropdown-btn { border: 1px solid var(--line); background: rgba(255,255,255,0.72); color: var(--text); border-radius: 999px; padding: 12px 18px; font: inherit; font-weight: 300; cursor: pointer; }
-    .dropdown-menu { position: absolute; top: calc(100% + 14px); right: 0; min-width: 240px; list-style: none; padding: 12px; border-radius: 24px; background: rgba(255,255,255,0.92); border: 1px solid rgba(255,255,255,0.85); box-shadow: var(--shadow); opacity: 0; visibility: hidden; transform: translateY(-8px); transition: 0.25s ease; backdrop-filter: blur(18px); }
+    .menu-dropdown { position: sticky; top: 0; z-index: 100; padding: 16px 0; background: rgba(72,66,61,0.84); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(231,215,194,0.12); }
+    .menu-dropdown .container { display: flex; justify-content: flex-end; align-items: center; position: relative; padding: 18px 24px; border-radius: 999px; background: rgba(56,51,47,0.9); border: 1px solid rgba(231,215,194,0.16); box-shadow: var(--shadow-soft); }
+    .dropdown-btn { border: 1px solid var(--line); background: rgba(91,82,75,0.95); color: var(--text); border-radius: 999px; padding: 12px 18px; font: inherit; font-weight: 300; cursor: pointer; }
+    .dropdown-menu { position: absolute; top: calc(100% + 14px); right: 0; min-width: 240px; list-style: none; padding: 12px; border-radius: 24px; background: rgba(63,57,52,0.92); border: 1px solid rgba(231,215,194,0.16); box-shadow: var(--shadow); opacity: 0; visibility: hidden; transform: translateY(-8px); transition: 0.25s ease; backdrop-filter: blur(18px); }
     .dropdown-menu.show { opacity: 1; visibility: visible; transform: translateY(0); }
     .dropdown-menu li + li { margin-top: 6px; }
     .dropdown-menu a { display: block; text-decoration: none; color: var(--text); padding: 12px 14px; border-radius: 16px; font-weight: 300; }
-    .dropdown-menu a:hover { background: #efefee; }
+    .dropdown-menu a:hover { background: rgba(231,215,194,0.08); }
     main { padding: 52px 0 90px; }
-    .hero-shell, .section-card, .footer-card { background: var(--panel); border: 1px solid rgba(255,255,255,0.78); box-shadow: var(--shadow); }
+    .hero-shell, .section-card, .footer-card { background: var(--panel); border: 1px solid rgba(231,215,194,0.16); box-shadow: var(--shadow); }
     .hero-shell { padding: clamp(30px, 6vw, 68px); border-radius: 40px; margin-bottom: 28px; }
-    .eyebrow { display: inline-block; margin-bottom: 14px; padding: 9px 16px; border-radius: 999px; background: rgba(255,255,255,0.72); color: var(--muted); font-size: 0.74rem; font-weight: 300; }
+    .eyebrow { display: inline-block; margin-bottom: 14px; padding: 9px 16px; border-radius: 999px; background: rgba(91,82,75,0.95); color: var(--text); font-size: 0.74rem; font-weight: 300; }
     h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; letter-spacing: -0.03em; margin-bottom: 14px; }
     .lead { max-width: 720px; color: var(--muted); font-size: 1.04rem; }
     .back-link { display: inline-block; margin-top: 18px; color: var(--text); text-decoration: none; border-bottom: 1px solid rgba(22,22,22,0.2); padding-bottom: 2px; }
@@ -48,9 +48,10 @@
     .section-head h2 { font-size: clamp(1.34rem, 2vw, 1.85rem); font-weight: 300; letter-spacing: -0.025em; }
     .section-head span { color: var(--muted); font-size: 0.76rem; font-weight: 300; }
     .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
-    .item { border-radius: 26px; border: 1px solid rgba(255,255,255,0.86); background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(244,243,241,0.96)); padding: 26px; box-shadow: var(--shadow-soft); }
+    .item { border-radius: 26px; border: 1px solid rgba(231,215,194,0.16); background: rgba(63,57,52,0.92); padding: 26px; box-shadow: var(--shadow-soft); }
+    .item-link { display: block; text-decoration: none; color: inherit; }
     .item-number { margin-bottom: 14px; color: var(--muted); font-size: 0.74rem; font-weight: 300; }
-    .image-frame { width: 100%; height: 260px; display: flex; align-items: center; justify-content: center; border-radius: 18px; background: rgba(255,255,255,0.78); margin-bottom: 18px; padding: 14px; }
+    .image-frame { width: 100%; height: 220px; display: flex; align-items: center; justify-content: center; border-radius: 18px; background: #4b443e; margin-bottom: 18px; padding: 8px; border: 1px solid rgba(231,215,194,0.14); }
     .image-frame img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
     .item h3 { font-size: 1.28rem; font-weight: 300; margin-bottom: 10px; }
     .item p { color: var(--muted); font-size: 0.98rem; }
@@ -58,7 +59,7 @@
     .footer-card { padding: 24px; border-radius: 24px; text-align: center; color: var(--muted); font-size: 0.85rem; }
     .whatsapp-float { position: fixed; right: 22px; bottom: 22px; width: 62px; height: 62px; border-radius: 999px; background: var(--wa); color: white; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 18px 28px rgba(37, 211, 102, 0.28); z-index: 120; text-decoration: none; }
     .whatsapp-float svg { width: 30px; height: 30px; display: block; }
-    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } .image-frame { height: 220px; } }
+    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } .image-frame { height: 200px; } }
   </style>
 </head>
 <body>
@@ -81,7 +82,7 @@
         <a href="climatizacion.html" class="back-arrow">← Volver a climatizacion</a>
         <div class="eyebrow">Climatizacion</div>
         <h1>Piso techo</h1>
-        <p class="lead">Dos opciones de piso techo presentadas con el mismo marco visual y sin cortes en las imágenes, para que ambas se vean completas y parejas.</p>
+        <p class="lead">Entrá a cada equipo para ver sus dos imágenes, con el mismo formato prolijo de heladera y sin marcos blancos alrededor de las fotos.</p>
       </section>
 
       <section class="section-card">
@@ -92,19 +93,23 @@
 
         <div class="grid">
           <article class="item">
-            <div class="item-number">Opcion 01</div>
-            <div class="image-frame">
-              <img src="piso techo 1 .jpeg" alt="Equipo piso techo Siam">
-            </div>
-            <h3>Piso techo Philco 18.000 frigorías Inverter 6TR</h3>
+            <a href="climatizacion-piso-techo-philco.html" class="item-link">
+              <div class="item-number">Opcion 01</div>
+              <div class="image-frame">
+                <img src="PT 2A.png" alt="Equipo piso techo Philco">
+              </div>
+              <h3>Piso techo Philco 18.000 frigorías Inverter 6TR</h3>
+            </a>
           </article>
 
           <article class="item">
-            <div class="item-number">Opcion 02</div>
-            <div class="image-frame">
-              <img src="piso techo.PNG" alt="Equipo piso techo Philco">
-            </div>
-            <h3>Piso Techo Siam 18.000 frigorías 6TR</h3>
+            <a href="climatizacion-piso-techo-siam.html" class="item-link">
+              <div class="item-number">Opcion 02</div>
+              <div class="image-frame">
+                <img src="PT A1.png" alt="Equipo piso techo Siam">
+              </div>
+              <h3>Piso Techo Siam 18.000 frigorías 6TR</h3>
+            </a>
           </article>
         </div>
       </section>
@@ -130,5 +135,3 @@
   </script>
 </body>
 </html>
-
-
