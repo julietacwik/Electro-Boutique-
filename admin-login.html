@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Owner Login | Electro Boutique</title>
+  <style>
+    :root {
+      --graphite: #3f3934;
+      --graphite-soft: #4b443e;
+      --beige-ink: #e7d7c2;
+      --beige-muted: #c8b59d;
+      --beige-line: rgba(231, 215, 194, 0.16);
+      --success: #9ec9ab;
+      --danger: #efb2ac;
+      --shadow: 0 24px 54px rgba(33, 28, 25, 0.22);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      color: var(--beige-ink);
+      background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.06), transparent 24%),
+        linear-gradient(180deg, #5a5048 0%, #433b35 48%, #332d28 100%);
+      display: grid;
+      place-items: center;
+      padding: 28px;
+    }
+
+    .shell {
+      width: min(480px, 100%);
+      background: rgba(63, 57, 52, 0.94);
+      border: 1px solid var(--beige-line);
+      border-radius: 34px;
+      box-shadow: var(--shadow);
+      padding: 34px;
+    }
+
+    .back-link,
+    .small-link {
+      color: var(--beige-muted);
+      text-decoration: none;
+    }
+
+    .back-link:hover,
+    .small-link:hover {
+      color: var(--beige-ink);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin: 22px 0 14px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(91, 82, 75, 0.95);
+      border: 1px solid rgba(231, 215, 194, 0.18);
+      color: var(--beige-ink);
+      font-size: 0.78rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 300;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+
+    p {
+      color: var(--beige-muted);
+      margin-bottom: 24px;
+    }
+
+    form {
+      display: grid;
+      gap: 16px;
+    }
+
+    label {
+      display: grid;
+      gap: 8px;
+      color: var(--beige-muted);
+      font-size: 0.92rem;
+    }
+
+    input {
+      width: 100%;
+      border: 1px solid rgba(231, 215, 194, 0.14);
+      background: rgba(75, 68, 62, 0.92);
+      color: var(--beige-ink);
+      border-radius: 18px;
+      padding: 15px 16px;
+      font: inherit;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: rgba(231, 215, 194, 0.38);
+      box-shadow: 0 0 0 3px rgba(231, 215, 194, 0.08);
+    }
+
+    button {
+      border: 1px solid rgba(231, 215, 194, 0.18);
+      background: linear-gradient(180deg, #dbc7ac 0%, #c5af93 100%);
+      color: #2d2621;
+      border-radius: 999px;
+      padding: 14px 18px;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .feedback {
+      min-height: 24px;
+      color: var(--beige-muted);
+      font-size: 0.92rem;
+    }
+
+    .feedback.error { color: var(--danger); }
+    .feedback.success { color: var(--success); }
+    .footer-note {
+      margin-top: 18px;
+      color: var(--beige-muted);
+      font-size: 0.86rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <section class="shell">
+    <a href="/" class="back-link">← Volver al sitio</a>
+    <div class="eyebrow">Owner Login</div>
+    <h1>Acceso privado</h1>
+    <p>Ingresá con tu email o usuario y tu contrasena para ver y administrar los mensajes del sitio.</p>
+
+    <form id="admin-login-form">
+      <label>
+        Email o usuario
+        <input type="text" name="identifier" autocomplete="username" required>
+      </label>
+      <label>
+        Contrasena
+        <input type="password" name="password" autocomplete="current-password" required>
+      </label>
+      <button type="submit">Entrar al dashboard</button>
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+    </form>
+
+    <div class="footer-note">Electro Boutique · acceso interno protegido</div>
+  </section>
+
+  <script>
+    const form = document.getElementById("admin-login-form");
+    const feedback = document.getElementById("feedback");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      feedback.className = "feedback";
+      feedback.textContent = "Ingresando...";
+
+      const formData = new FormData(form);
+      const payload = {
+        identifier: formData.get("identifier"),
+        password: formData.get("password")
+      };
+
+      try {
+        const response = await fetch("/api/admin/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.error || "No se pudo iniciar sesion.");
+        }
+
+        feedback.className = "feedback success";
+        feedback.textContent = "Ingreso correcto. Redirigiendo...";
+        window.location.href = "/admin-dashboard";
+      } catch (error) {
+        feedback.className = "feedback error";
+        feedback.textContent = error.message;
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Electro Boutique</title>
+  <style>
+    :root {
+      --graphite: #3f3934;
+      --graphite-soft: #4b443e;
+      --beige-ink: #e7d7c2;
+      --beige-muted: #c8b59d;
+      --beige-line: rgba(231, 215, 194, 0.16);
+      --beige-strong: #d9c4a5;
+      --success: #9ec9ab;
+      --danger: #efb2ac;
+      --shadow: 0 24px 54px rgba(33, 28, 25, 0.22);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      color: var(--beige-ink);
+      background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.06), transparent 24%),
+        linear-gradient(180deg, #5a5048 0%, #433b35 48%, #332d28 100%);
+      padding: 24px;
+    }
+
+    .container {
+      width: min(1200px, 100%);
+      margin: 0 auto;
+    }
+
+    .topbar,
+    .table-shell,
+    .card {
+      background: rgba(63, 57, 52, 0.94);
+      border: 1px solid var(--beige-line);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .topbar {
+      padding: 26px 28px;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(91, 82, 75, 0.95);
+      border: 1px solid rgba(231, 215, 194, 0.18);
+      color: var(--beige-ink);
+      font-size: 0.78rem;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 300;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+    }
+
+    p,
+    .muted,
+    th,
+    td {
+      color: var(--beige-muted);
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    button,
+    .home-link {
+      border: 1px solid rgba(231, 215, 194, 0.18);
+      border-radius: 999px;
+      padding: 12px 16px;
+      font: inherit;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .primary-action {
+      background: linear-gradient(180deg, #dbc7ac 0%, #c5af93 100%);
+      color: #2d2621;
+      font-weight: 600;
+    }
+
+    .ghost-action,
+    .status-button,
+    .delete-button {
+      background: rgba(75, 68, 62, 0.92);
+      color: var(--beige-ink);
+    }
+
+    .table-shell {
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    .feedback {
+      min-height: 24px;
+      margin: 0 0 16px;
+      color: var(--beige-muted);
+    }
+
+    .feedback.error { color: var(--danger); }
+    .feedback.success { color: var(--success); }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .card {
+      padding: 18px 20px;
+    }
+
+    .card span {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--beige-muted);
+      margin-bottom: 8px;
+    }
+
+    .card strong {
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: var(--beige-ink);
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 980px;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 16px 14px;
+      border-bottom: 1px solid rgba(231, 215, 194, 0.08);
+      vertical-align: top;
+    }
+
+    th {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    td strong {
+      color: var(--beige-ink);
+      font-weight: 500;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(91, 82, 75, 0.95);
+      color: var(--beige-ink);
+      border: 1px solid rgba(231, 215, 194, 0.14);
+      font-size: 0.82rem;
+    }
+
+    .row-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .empty-state {
+      padding: 34px 18px;
+      text-align: center;
+      color: var(--beige-muted);
+    }
+
+    @media (max-width: 860px) {
+      body {
+        padding: 16px;
+      }
+
+      .topbar {
+        flex-direction: column;
+      }
+
+      .actions {
+        justify-content: flex-start;
+      }
+
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="topbar">
+      <div>
+        <div class="eyebrow">Admin Dashboard</div>
+        <h1>Mensajes recibidos</h1>
+        <p id="admin-meta">Cargando acceso del propietario...</p>
+      </div>
+      <div class="actions">
+        <a href="/" class="home-link ghost-action">Ver sitio</a>
+        <button id="refresh-button" class="ghost-action">Actualizar</button>
+        <button id="logout-button" class="primary-action">Cerrar sesion</button>
+      </div>
+    </section>
+
+    <div class="summary-grid">
+      <div class="card">
+        <span>Total</span>
+        <strong id="total-count">0</strong>
+      </div>
+      <div class="card">
+        <span>Nuevos</span>
+        <strong id="new-count">0</strong>
+      </div>
+      <div class="card">
+        <span>Respondidos</span>
+        <strong id="replied-count">0</strong>
+      </div>
+    </div>
+
+    <section class="table-shell">
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Cliente</th>
+              <th>Contacto</th>
+              <th>Mensaje</th>
+              <th>Fecha</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="messages-body">
+            <tr>
+              <td colspan="6" class="empty-state">Cargando mensajes...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const body = document.getElementById("messages-body");
+    const feedback = document.getElementById("feedback");
+    const totalCount = document.getElementById("total-count");
+    const newCount = document.getElementById("new-count");
+    const repliedCount = document.getElementById("replied-count");
+    const adminMeta = document.getElementById("admin-meta");
+
+    function formatDate(value) {
+      return new Intl.DateTimeFormat("es-AR", {
+        dateStyle: "medium",
+        timeStyle: "short"
+      }).format(new Date(value));
+    }
+
+    function setFeedback(message, type = "") {
+      feedback.className = `feedback ${type}`.trim();
+      feedback.textContent = message;
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    async function loadAdminMeta() {
+      const response = await fetch("/api/admin/me");
+      if (response.status === 401) {
+        window.location.href = "/admin-login";
+        return;
+      }
+
+      const data = await response.json();
+      adminMeta.textContent = `Sesion iniciada como ${data.user.username || data.user.email}.`;
+    }
+
+    function renderRows(messages) {
+      totalCount.textContent = messages.length;
+      newCount.textContent = messages.filter((message) => message.status === "new").length;
+      repliedCount.textContent = messages.filter((message) => message.status === "replied").length;
+
+      if (!messages.length) {
+        body.innerHTML = '<tr><td colspan="6" class="empty-state">Todavia no hay mensajes guardados.</td></tr>';
+        return;
+      }
+
+      body.innerHTML = messages.map((message) => `
+        <tr>
+          <td><strong>${escapeHtml(message.name)}</strong></td>
+          <td>
+            <div>${escapeHtml(message.email)}</div>
+            <div class="muted">${escapeHtml(message.phone || "Sin telefono")}</div>
+          </td>
+          <td>${escapeHtml(message.message)}</td>
+          <td>${formatDate(message.createdAt)}</td>
+          <td><span class="status-pill">${escapeHtml(message.status)}</span></td>
+          <td>
+            <div class="row-actions">
+              <button class="status-button" data-action="read" data-id="${message.id}">Marcar leido</button>
+              <button class="status-button" data-action="replied" data-id="${message.id}">Marcar respondido</button>
+              <button class="delete-button" data-action="delete" data-id="${message.id}">Eliminar</button>
+            </div>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    async function loadMessages() {
+      setFeedback("Cargando mensajes...");
+      const response = await fetch("/api/admin/messages");
+      if (response.status === 401) {
+        window.location.href = "/admin-login";
+        return;
+      }
+
+      const data = await response.json();
+      renderRows(data.messages || []);
+      setFeedback(`Se cargaron ${data.messages.length} mensajes.`, "success");
+    }
+
+    async function updateStatus(id, status) {
+      const response = await fetch(`/api/admin/messages/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status })
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || "No se pudo actualizar el estado.");
+      }
+
+      return data;
+    }
+
+    async function deleteMessage(id) {
+      const response = await fetch(`/api/admin/messages/${id}`, { method: "DELETE" });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || "No se pudo eliminar el mensaje.");
+      }
+
+      return data;
+    }
+
+    body.addEventListener("click", async (event) => {
+      const button = event.target.closest("button[data-action]");
+      if (!button) {
+        return;
+      }
+
+      const { action, id } = button.dataset;
+      try {
+        if (action === "delete") {
+          const confirmed = window.confirm("¿Querés eliminar este mensaje?");
+          if (!confirmed) {
+            return;
+          }
+
+          await deleteMessage(id);
+          setFeedback("Mensaje eliminado correctamente.", "success");
+        } else {
+          await updateStatus(id, action);
+          setFeedback("Estado actualizado correctamente.", "success");
+        }
+
+        await loadMessages();
+      } catch (error) {
+        setFeedback(error.message, "error");
+      }
+    });
+
+    document.getElementById("refresh-button").addEventListener("click", async () => {
+      try {
+        await loadMessages();
+      } catch (error) {
+        setFeedback(error.message, "error");
+      }
+    });
+
+    document.getElementById("logout-button").addEventListener("click", async () => {
+      await fetch("/api/admin/logout", { method: "POST" });
+      window.location.href = "/admin-login";
+    });
+
+    Promise.all([loadAdminMeta(), loadMessages()]).catch((error) => {
+      setFeedback(error.message, "error");
+    });
+  </script>
+</body>
+</html>
