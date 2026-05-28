@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200" role="img" aria-labelledby="title desc">
+  <title id="title">Placeholder Pava Ariete</title>
+  <desc id="desc">Placeholder premium para imagen de producto de pava eléctrica.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5b5149"/>
+      <stop offset="100%" stop-color="#413934"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0e1cc"/>
+      <stop offset="50%" stop-color="#d3b795"/>
+      <stop offset="100%" stop-color="#b09472"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="1200" fill="url(#bg)"/>
+  <rect x="80" y="80" width="1040" height="1040" rx="56" fill="none" stroke="rgba(255,255,255,0.14)"/>
+  <g transform="translate(290 190)">
+    <path d="M310 130c120 0 190 82 190 210v180c0 100-70 170-178 170H188c-108 0-178-70-178-170V340c0-128 70-210 190-210h110Z" fill="url(#metal)"/>
+    <path d="M510 285h64c48 0 80 30 80 74 0 48-34 79-88 79h-56" fill="none" stroke="#d8c3a8" stroke-width="26" stroke-linecap="round"/>
+    <path d="M170 144c-18-68 12-116 88-142" fill="none" stroke="#d8c3a8" stroke-width="24" stroke-linecap="round"/>
+    <path d="M58 508h394" stroke="#d8c3a8" stroke-width="28" stroke-linecap="round" opacity="0.45"/>
+  </g>
+  <text x="600" y="940" text-anchor="middle" fill="#ead8c2" font-family="Avenir Next, Segoe UI, sans-serif" font-size="62" letter-spacing="4">PAVA ELÉCTRICA ARIETE</text>
+  <text x="600" y="1006" text-anchor="middle" fill="#c8b59d" font-family="Avenir Next, Segoe UI, sans-serif" font-size="30" letter-spacing="3">IMAGEN TEMPORAL HASTA CARGAR LA FOTO FINAL</text>
+</svg>
