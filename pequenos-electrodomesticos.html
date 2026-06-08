@@ -40,6 +40,10 @@
     .product-card-link{display:block;text-decoration:none;color:inherit;}
     .item-number{margin-bottom:14px;color:var(--muted);font-size:0.74rem;font-weight:300;}
     .item-image{width:100%;height:250px;object-fit:contain;border-radius:18px;margin-bottom:18px;border:1px solid rgba(22,22,22,0.06);background:#f4f3f1;padding:12px;}
+    .card-variant-switcher{display:flex;align-items:center;justify-content:center;gap:10px;margin:-4px 0 16px;}
+    .card-color-dot{width:14px;height:14px;border-radius:999px;border:1.5px solid rgba(22,22,22,0.16);background:var(--dot);box-shadow:0 0 0 0 rgba(22,22,22,0);cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;}
+    .card-color-dot:hover{transform:translateY(-1px);}
+    .card-color-dot.active{border-color:#efe1d0;box-shadow:0 0 0 4px rgba(239,225,208,.22);}
     .product-card h3{margin-bottom:10px;font-size:1.1rem;letter-spacing:-0.02em;font-weight:400;}
     .product-card p{color:var(--muted);font-size:0.96rem;margin-bottom:16px;}
     .price-tag{margin-top:auto;margin-bottom:14px;padding:12px 14px;border-radius:18px;background:rgba(222,205,181,0.16);border:1px solid rgba(231,215,194,0.18);font-size:1.18rem;font-weight:600;color:#f0e4d4;text-align:center;}
@@ -83,13 +87,18 @@
           <span>4 productos</span>
         </div>
         <div class="grid">
-          <article class="product-card">
+          <article class="product-card" data-variant-card="card-tostadora-01">
             <a href="pequenos-electrodomesticos-01.html" class="product-card-link">
               <div class="item-number">Ariete Vintage · Opción 01</div>
-              <img src="tostadora 1.png" alt="Tostadora Ariete Vintage Beige" class="item-image" onerror="this.style.display='none'">
+              <img src="tostadora 1.png" alt="Tostadora Ariete Vintage Beige" class="item-image" data-variant-image onerror="this.style.display='none'">
               <h3>Tostadora Ariete línea Vintage Color Beige</h3>
               <p>Diseño retro refinado para una cocina cálida y prolija, ideal para sumar carácter visual y funcionalidad diaria.</p>
             </a>
+            <div class="card-variant-switcher" aria-label="Colores de la tostadora vintage">
+              <button class="card-color-dot active" type="button" aria-label="Color beige" data-target="card-tostadora-01" data-src="tostadora 1.png" data-alt="Tostadora Ariete Vintage Beige" style="--dot:#d7c2a4"></button>
+              <button class="card-color-dot" type="button" aria-label="Color verde" data-target="card-tostadora-01" data-src="tost verde.png" data-alt="Tostadora Ariete Vintage Verde" style="--dot:#6d8062"></button>
+              <button class="card-color-dot" type="button" aria-label="Color azul" data-target="card-tostadora-01" data-src="tost azul.png" data-alt="Tostadora Ariete Vintage Azul" style="--dot:#7b90a6"></button>
+            </div>
             <div class="price-tag">$139.000</div>
             <div class="product-actions">
               <a href="pequenos-electrodomesticos-01.html" class="detail-link">Ver detalle</a>
@@ -97,13 +106,18 @@
             </div>
           </article>
 
-          <article class="product-card">
+          <article class="product-card" data-variant-card="card-tostadora-02">
             <a href="pequenos-electrodomesticos-02.html" class="product-card-link">
               <div class="item-number">Ariete Vintage · Opción 02</div>
-              <img src="tostadora 2.png" alt="Tostadora Ariete Vintage 4 panes" class="item-image" onerror="this.style.display='none'">
+              <img src="tostadora 2.png" alt="Tostadora Ariete Vintage 4 panes" class="item-image" data-variant-image onerror="this.style.display='none'">
               <h3>Tostadora Ariete línea Vintage 4 panes</h3>
               <p>Formato amplio y elegante para servir más rápido, con una presencia visual pensada para cocinas modernas y detallistas.</p>
             </a>
+            <div class="card-variant-switcher" aria-label="Colores de la tostadora 4 panes">
+              <button class="card-color-dot active" type="button" aria-label="Color beige" data-target="card-tostadora-02" data-src="tostadora 2.png" data-alt="Tostadora Ariete Vintage 4 panes beige" style="--dot:#d7c2a4"></button>
+              <button class="card-color-dot" type="button" aria-label="Color verde" data-target="card-tostadora-02" data-src="tostadora verde.png" data-alt="Tostadora Ariete Vintage 4 panes verde" style="--dot:#6d8062"></button>
+              <button class="card-color-dot" type="button" aria-label="Color azul" data-target="card-tostadora-02" data-src="tostadora azul.png" data-alt="Tostadora Ariete Vintage 4 panes azul" style="--dot:#7b90a6"></button>
+            </div>
             <div class="price-tag">$189.000</div>
             <div class="product-actions">
               <a href="pequenos-electrodomesticos-02.html" class="detail-link">Ver detalle</a>
@@ -111,13 +125,18 @@
             </div>
           </article>
 
-          <article class="product-card">
+          <article class="product-card" data-variant-card="card-pava-03">
             <a href="pequenos-electrodomesticos-03.html" class="product-card-link">
               <div class="item-number">Ariete Vintage · Opción 03</div>
-              <img src="pava-beige.png" alt="Pava eléctrica Ariete Vintage beige" class="item-image" onerror="this.style.display='none'">
+              <img src="pava-beige.png" alt="Pava eléctrica Ariete Vintage beige" class="item-image" data-variant-image onerror="this.style.display='none'">
               <h3>Pava eléctrica Ariete Línea Vintage</h3>
               <p>Una pieza cálida y funcional para completar la mesada con una estética vintage cuidada y una presencia elegante en la cocina.</p>
             </a>
+            <div class="card-variant-switcher" aria-label="Colores de la pava">
+              <button class="card-color-dot active" type="button" aria-label="Color beige" data-target="card-pava-03" data-src="pava-beige.png" data-alt="Pava eléctrica Ariete Vintage beige" style="--dot:#d7c2a4"></button>
+              <button class="card-color-dot" type="button" aria-label="Color verde" data-target="card-pava-03" data-src="pava-verde.png" data-alt="Pava eléctrica Ariete Vintage verde" style="--dot:#6d8062"></button>
+              <button class="card-color-dot" type="button" aria-label="Color azul" data-target="card-pava-03" data-src="pava-azul.png" data-alt="Pava eléctrica Ariete Vintage azul" style="--dot:#7b90a6"></button>
+            </div>
             <div class="price-tag">$139.000</div>
             <div class="product-actions">
               <a href="pequenos-electrodomesticos-03.html" class="detail-link">Ver detalle</a>
@@ -157,6 +176,22 @@
     const button=document.querySelector('.dropdown-btn');const menu=document.querySelector('.dropdown-menu');
     button.addEventListener('click',function(){menu.classList.toggle('show');});
     document.addEventListener('click',function(event){if(!event.target.closest('.menu-dropdown')) menu.classList.remove('show');});
+    document.querySelectorAll('.card-color-dot').forEach(function(dot){
+      dot.addEventListener('click',function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        const targetCard=document.querySelector('[data-variant-card="'+dot.dataset.target+'"]');
+        if(!targetCard)return;
+        const targetImage=targetCard.querySelector('[data-variant-image]');
+        if(!targetImage)return;
+        targetImage.src=dot.dataset.src;
+        targetImage.alt=dot.dataset.alt;
+        document.querySelectorAll('.card-color-dot[data-target="'+dot.dataset.target+'"]').forEach(function(item){
+          item.classList.remove('active');
+        });
+        dot.classList.add('active');
+      });
+    });
   </script>
   <script src="site-premium.js"></script>
 </body>
