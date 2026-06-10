@@ -488,6 +488,10 @@
                 <input id="phone" name="phone" type="text" placeholder="+54 9 11...">
               </div>
               <div class="field full">
+                <label for="product">Producto de interés (opcional)</label>
+                <input id="product" name="product" type="text" placeholder="Ej: Heladera Bosch, Anafe Samsung, Piso Techo Philco...">
+              </div>
+              <div class="field full">
                 <label for="message">Mensaje</label>
                 <textarea id="message" name="message" rows="7" required></textarea>
               </div>
@@ -541,11 +545,12 @@
         name: formData.get("name"),
         email: formData.get("email"),
         phone: formData.get("phone"),
+        product: formData.get("product"),
         message: formData.get("message")
       };
 
       try {
-        const response = await fetch("/api/messages", {
+        const response = await fetch("/api/inquiries", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload)

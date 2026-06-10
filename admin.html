@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Electro Boutique</title>
+  <style>
+    :root {
+      --graphite: #3f3934;
+      --graphite-soft: #4b443e;
+      --beige-ink: #e7d7c2;
+      --beige-muted: #c8b59d;
+      --beige-line: rgba(231, 215, 194, 0.16);
+      --beige-strong: #d9c4a5;
+      --success: #9ec9ab;
+      --danger: #efb2ac;
+      --wa: #25d366;
+      --shadow: 0 18px 48px rgba(33, 28, 25, 0.18);
+      --shadow-soft: 0 12px 28px rgba(33, 28, 25, 0.14);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      color: var(--beige-ink);
+      line-height: 1.5;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.08), transparent 28%),
+        linear-gradient(180deg, #5a5048 0%, #433b35 48%, #332d28 100%);
+    }
+
+    .container { width: min(1240px, calc(100% - 40px)); margin: 0 auto; }
+
+    .menu-dropdown {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 16px 0;
+      background: rgba(72, 66, 61, 0.84);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(231, 215, 194, 0.12);
+    }
+
+    .menu-dropdown .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      padding: 18px 24px;
+      border-radius: 999px;
+      background: rgba(56, 51, 47, 0.9);
+      border: 1px solid rgba(231, 215, 194, 0.16);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .top-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .top-links a,
+    .top-links button {
+      border: 1px solid var(--beige-line);
+      background: rgba(91, 82, 75, 0.95);
+      color: var(--beige-ink);
+      border-radius: 999px;
+      padding: 12px 18px;
+      font: inherit;
+      font-weight: 300;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    main { padding: 42px 0 72px; }
+
+    .hero-shell,
+    .panel,
+    .footer-card {
+      background: rgba(63, 57, 52, 0.94);
+      border: 1px solid rgba(231, 215, 194, 0.16);
+      box-shadow: var(--shadow);
+      color: var(--beige-ink);
+    }
+
+    .hero-shell {
+      padding: clamp(30px, 6vw, 64px);
+      border-radius: 40px;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 9px 16px;
+      border-radius: 999px;
+      background: rgba(91, 82, 75, 0.95);
+      color: var(--beige-ink);
+      font-size: 0.74rem;
+      border: 1px solid rgba(231, 215, 194, 0.18);
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4.2vw, 3.1rem);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+      font-weight: 300;
+    }
+
+    .lead,
+    .panel-note,
+    .table th,
+    .inquiry-meta,
+    .footer-card {
+      color: var(--beige-muted);
+    }
+
+    .lead {
+      max-width: 700px;
+      font-size: 1.05rem;
+    }
+
+    .panel {
+      border-radius: 34px;
+      padding: 30px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 340px minmax(0, 1fr);
+      gap: 24px;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 300;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .login-form {
+      display: grid;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field label {
+      color: var(--beige-muted);
+      font-size: 0.92rem;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      border: 1px solid rgba(231, 215, 194, 0.14);
+      background: rgba(75, 68, 62, 0.92);
+      color: var(--beige-ink);
+      border-radius: 18px;
+      padding: 15px 16px;
+      font: inherit;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      outline: none;
+      border-color: rgba(231, 215, 194, 0.36);
+      box-shadow: 0 0 0 3px rgba(231, 215, 194, 0.08);
+    }
+
+    .button-primary {
+      border: 1px solid rgba(231, 215, 194, 0.18);
+      background: linear-gradient(180deg, #dbc7ac 0%, #c5af93 100%);
+      color: #2d2621;
+      border-radius: 999px;
+      padding: 14px 18px;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .status-text {
+      min-height: 24px;
+      font-size: 0.92rem;
+    }
+
+    .status-text.success { color: var(--success); }
+    .status-text.error { color: var(--danger); }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .toolbar strong {
+      font-size: 1.06rem;
+      font-weight: 400;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 24px;
+      border: 1px solid rgba(231, 215, 194, 0.1);
+      background: rgba(75, 68, 62, 0.72);
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 900px;
+    }
+
+    .table th,
+    .table td {
+      padding: 16px;
+      border-bottom: 1px solid rgba(231, 215, 194, 0.08);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .table td {
+      color: var(--beige-ink);
+      font-size: 0.95rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 7px 12px;
+      border: 1px solid rgba(231, 215, 194, 0.18);
+      background: rgba(91, 82, 75, 0.95);
+      color: var(--beige-ink);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .table-actions {
+      display: grid;
+      gap: 10px;
+      min-width: 180px;
+    }
+
+    .hint {
+      font-size: 0.88rem;
+      color: var(--beige-muted);
+      margin-top: 14px;
+    }
+
+    .empty-state {
+      padding: 22px;
+      border-radius: 24px;
+      background: rgba(75, 68, 62, 0.72);
+      color: var(--beige-muted);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    footer { padding: 0 0 42px; }
+
+    .footer-card {
+      padding: 24px;
+      border-radius: 24px;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 980px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .menu-dropdown .container,
+      .hero-shell,
+      .panel {
+        padding: 24px;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="site-premium.css">
+</head>
+<body>
+  <nav class="menu-dropdown">
+    <div class="container">
+      <div>
+        <span class="eyebrow" style="margin-bottom:0;">Electro Boutique · Admin</span>
+      </div>
+      <div class="top-links">
+        <a href="index.html">Volver al sitio</a>
+        <button id="logout-button" class="hidden" type="button">Cerrar sesión</button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+      <section class="hero-shell">
+        <div class="eyebrow">Panel privado</div>
+        <h1>Consultas y seguimiento comercial.</h1>
+        <p class="lead">Ingresá con tu usuario admin para ver todas las consultas que llegan desde la web, con cliente, producto, fecha y estado de seguimiento.</p>
+      </section>
+
+      <section class="grid">
+        <div class="panel">
+          <h2 class="section-title">Ingreso de administrador</h2>
+          <p class="panel-note">Acceso privado para el dueño o equipo interno de Electro Boutique.</p>
+
+          <form id="login-form" class="login-form">
+            <div class="field">
+              <label for="admin-email">Email</label>
+              <input id="admin-email" name="email" type="email" required>
+            </div>
+            <div class="field">
+              <label for="admin-password">Password</label>
+              <input id="admin-password" name="password" type="password" required>
+            </div>
+            <button type="submit" class="button-primary">Iniciar sesión</button>
+            <div id="login-status" class="status-text" aria-live="polite"></div>
+          </form>
+
+          <p class="hint">El token se guarda solo en este navegador para permitir el acceso al panel.</p>
+        </div>
+
+        <div class="panel">
+          <div class="toolbar">
+            <div>
+              <h2 class="section-title">Consultas recibidas</h2>
+              <p class="panel-note">Actualizá el estado de cada consulta sin salir del panel.</p>
+            </div>
+            <button id="reload-button" type="button" class="button-primary hidden">Actualizar listado</button>
+          </div>
+
+          <div id="dashboard-locked" class="empty-state">
+            Iniciá sesión para ver las consultas guardadas en la base de datos.
+          </div>
+
+          <div id="dashboard-content" class="hidden">
+            <div class="table-wrap">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Cliente</th>
+                    <th>Contacto</th>
+                    <th>Producto</th>
+                    <th>Mensaje</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                  </tr>
+                </thead>
+                <tbody id="inquiries-body"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="dashboard-status" class="status-text" style="margin-top:16px;" aria-live="polite"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-card">Electro Boutique · Panel interno de consultas</div>
+    </div>
+  </footer>
+
+  <script>
+    const API = {
+      login: "/api/auth/login",
+      inquiries: "/api/admin/inquiries"
+    };
+
+    const STORAGE_KEY = "electro_boutique_admin_token";
+    const loginForm = document.getElementById("login-form");
+    const loginStatus = document.getElementById("login-status");
+    const dashboardStatus = document.getElementById("dashboard-status");
+    const dashboardLocked = document.getElementById("dashboard-locked");
+    const dashboardContent = document.getElementById("dashboard-content");
+    const inquiriesBody = document.getElementById("inquiries-body");
+    const reloadButton = document.getElementById("reload-button");
+    const logoutButton = document.getElementById("logout-button");
+
+    function getToken() {
+      return localStorage.getItem(STORAGE_KEY);
+    }
+
+    function setToken(token) {
+      localStorage.setItem(STORAGE_KEY, token);
+    }
+
+    function clearToken() {
+      localStorage.removeItem(STORAGE_KEY);
+    }
+
+    function showStatus(element, message, type) {
+      element.className = "status-text" + (type ? " " + type : "");
+      element.textContent = message || "";
+    }
+
+    function formatDate(value) {
+      try {
+        return new Date(value).toLocaleString("es-AR");
+      } catch (error) {
+        return value || "-";
+      }
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function renderInquiries(inquiries) {
+      if (!inquiries.length) {
+        inquiriesBody.innerHTML = '<tr><td colspan="7"><div class="empty-state">Todavía no hay consultas cargadas.</div></td></tr>';
+        return;
+      }
+
+      inquiriesBody.innerHTML = inquiries.map((inquiry) => {
+        const productLabel = inquiry.product_name
+          ? `${escapeHtml(inquiry.product_name)}${inquiry.product_brand ? ` · ${escapeHtml(inquiry.product_brand)}` : ""}`
+          : "Sin producto asociado";
+
+        return `
+          <tr>
+            <td>
+              <strong>${escapeHtml(inquiry.client_name)}</strong>
+            </td>
+            <td>
+              <div>${escapeHtml(inquiry.client_email)}</div>
+              <div class="inquiry-meta">${escapeHtml(inquiry.client_phone || "-")}</div>
+            </td>
+            <td>${productLabel}</td>
+            <td>${escapeHtml(inquiry.message)}</td>
+            <td>${formatDate(inquiry.created_at)}</td>
+            <td><span class="badge">${escapeHtml(inquiry.status)}</span></td>
+            <td>
+              <div class="table-actions">
+                <select data-status-select="${inquiry.id_inquiry}">
+                  <option value="pending" ${inquiry.status === "pending" ? "selected" : ""}>pending</option>
+                  <option value="read" ${inquiry.status === "read" ? "selected" : ""}>read</option>
+                  <option value="replied" ${inquiry.status === "replied" ? "selected" : ""}>replied</option>
+                </select>
+                <button class="button-primary" type="button" data-save-status="${inquiry.id_inquiry}">Guardar estado</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    async function fetchWithAuth(url, options = {}) {
+      const token = getToken();
+      const response = await fetch(url, {
+        ...options,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          ...(options.headers || {})
+        }
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(data.error || "No se pudo completar la solicitud.");
+      }
+
+      return data;
+    }
+
+    async function loadInquiries() {
+      try {
+        showStatus(dashboardStatus, "Cargando consultas...", "");
+        const inquiries = await fetchWithAuth(API.inquiries);
+        renderInquiries(inquiries);
+        showStatus(dashboardStatus, `Se cargaron ${inquiries.length} consultas.`, "success");
+      } catch (error) {
+        if (String(error.message).includes("Token")) {
+          clearToken();
+          updateAuthUI();
+        }
+        showStatus(dashboardStatus, error.message || "No se pudieron cargar las consultas.", "error");
+      }
+    }
+
+    async function updateInquiryStatus(inquiryId, status) {
+      try {
+        showStatus(dashboardStatus, "Actualizando estado...", "");
+        await fetchWithAuth(`/api/admin/inquiries/${inquiryId}/status`, {
+          method: "PATCH",
+          body: JSON.stringify({ status })
+        });
+        showStatus(dashboardStatus, "Estado actualizado correctamente.", "success");
+        await loadInquiries();
+      } catch (error) {
+        showStatus(dashboardStatus, error.message || "No se pudo actualizar el estado.", "error");
+      }
+    }
+
+    function updateAuthUI() {
+      const loggedIn = Boolean(getToken());
+      dashboardLocked.classList.toggle("hidden", loggedIn);
+      dashboardContent.classList.toggle("hidden", !loggedIn);
+      reloadButton.classList.toggle("hidden", !loggedIn);
+      logoutButton.classList.toggle("hidden", !loggedIn);
+
+      if (loggedIn) {
+        loadInquiries();
+      } else {
+        inquiriesBody.innerHTML = "";
+        showStatus(dashboardStatus, "", "");
+      }
+    }
+
+    loginForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      showStatus(loginStatus, "Validando acceso...", "");
+
+      const formData = new FormData(loginForm);
+      const payload = {
+        email: formData.get("email"),
+        password: formData.get("password")
+      };
+
+      try {
+        const data = await fetch(API.login, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        }).then(async (response) => {
+          const json = await response.json().catch(() => ({}));
+          if (!response.ok) {
+            throw new Error(json.error || "No se pudo iniciar sesión.");
+          }
+          return json;
+        });
+
+        setToken(data.token);
+        showStatus(loginStatus, "Acceso correcto.", "success");
+        loginForm.reset();
+        updateAuthUI();
+      } catch (error) {
+        showStatus(loginStatus, error.message || "No se pudo iniciar sesión.", "error");
+      }
+    });
+
+    reloadButton.addEventListener("click", () => loadInquiries());
+
+    logoutButton.addEventListener("click", () => {
+      clearToken();
+      updateAuthUI();
+      showStatus(loginStatus, "Sesión cerrada.", "success");
+    });
+
+    inquiriesBody.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-save-status]");
+      if (!button) return;
+
+      const inquiryId = button.getAttribute("data-save-status");
+      const select = document.querySelector(`[data-status-select="${inquiryId}"]`);
+      if (!select) return;
+
+      updateInquiryStatus(inquiryId, select.value);
+    });
+
+    updateAuthUI();
+  </script>
+  <script src="site-premium.js"></script>
+</body>
+</html>

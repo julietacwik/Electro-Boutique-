@@ -331,8 +331,8 @@ body[data-page="climatizacion-baja-silueta-siam.html"] {
 .product-media,
 .gallery .slide img {
   background:
-    radial-gradient(circle at top left, rgba(255, 255, 255, 0.04), transparent 36%),
-    #4c443d !important;
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.10), transparent 38%),
+    #655b52 !important;
   border-color: rgba(231, 215, 194, 0.12) !important;
 }
 
@@ -342,8 +342,8 @@ body[data-page="climatizacion-baja-silueta-siam.html"] {
 }
 
 .img-cutout {
-  mix-blend-mode: multiply;
-  filter: contrast(1.03) saturate(0.98);
+  mix-blend-mode: normal;
+  filter: brightness(1.08) contrast(1.03) saturate(1.02);
 }
 
 .product-card h3 {
