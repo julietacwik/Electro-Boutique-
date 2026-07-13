@@ -4,101 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Piso techo Siam | Electro Boutique</title>
-  <style>
-    :root {
-      --panel: rgba(63, 57, 52, 0.92);
-      --text: #e7d7c2;
-      --muted: #c8b59d;
-      --line: rgba(231, 215, 194, 0.16);
-      --shadow: 0 16px 48px rgba(15, 15, 15, 0.06);
-      --shadow-soft: 0 10px 28px rgba(15, 15, 15, 0.04);
-      --wa: #25d366;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: "Avenir Next", "Segoe UI", sans-serif;
-      color: var(--text);
-      line-height: 1.5;
-      background:
-        radial-gradient(circle at top left, rgba(255,255,255,0.52), transparent 28%),
-        linear-gradient(180deg, #ddd8d2 0%, #d3cec7 48%, #cbc6c0 100%);
-    }
-
-    .container { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
-    .menu-dropdown { position: sticky; top: 0; z-index: 100; padding: 16px 0; background: rgba(72,66,61,0.84); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(231,215,194,0.12); }
-    .menu-dropdown .container { display: flex; justify-content: flex-end; align-items: center; position: relative; padding: 18px 24px; border-radius: 999px; background: rgba(56,51,47,0.9); border: 1px solid rgba(231,215,194,0.16); box-shadow: var(--shadow-soft); }
-    .dropdown-btn { border: 1px solid var(--line); background: rgba(91,82,75,0.95); color: var(--text); border-radius: 999px; padding: 12px 18px; font: inherit; font-weight: 300; cursor: pointer; }
-    .dropdown-menu { position: absolute; top: calc(100% + 14px); right: 0; min-width: 240px; list-style: none; padding: 12px; border-radius: 24px; background: rgba(63,57,52,0.92); border: 1px solid rgba(231,215,194,0.16); box-shadow: var(--shadow); opacity: 0; visibility: hidden; transform: translateY(-8px); transition: 0.25s ease; backdrop-filter: blur(18px); }
-    .dropdown-menu.show { opacity: 1; visibility: visible; transform: translateY(0); }
-    .dropdown-menu li + li { margin-top: 6px; }
-    .dropdown-menu a { display: block; text-decoration: none; color: var(--text); padding: 12px 14px; border-radius: 16px; font-weight: 300; }
-    .dropdown-menu a:hover { background: rgba(231,215,194,0.08); }
-    .submenu-group { border-radius: 16px; }
-    .submenu-group summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; color: var(--text); padding: 12px 14px; border-radius: 16px; font-weight: 300; }
-    .submenu-group summary::-webkit-details-marker { display: none; }
-    .submenu-group summary::after { content: "▾"; font-size: 0.78rem; color: var(--muted); transition: transform 0.2s ease; }
-    .submenu-group[open] summary::after { transform: rotate(180deg); }
-    .submenu-group summary:hover { background: #efefee; }
-    .submenu { list-style: none; padding: 4px 0 0 12px; }
-    .submenu li + li { margin-top: 4px; }
-
-    main { padding: 52px 0 90px; }
-    .hero-shell, .section-card, .footer-card { background: var(--panel); border: 1px solid rgba(231,215,194,0.16); box-shadow: var(--shadow); }
-    .hero-shell { padding: clamp(30px, 6vw, 68px); border-radius: 40px; margin-bottom: 28px; }
-    .back-arrow { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 18px; color: var(--text); text-decoration: none; font-size: 0.95rem; font-weight: 300; }
-    .eyebrow { display: inline-block; margin-bottom: 14px; padding: 9px 16px; border-radius: 999px; background: rgba(91,82,75,0.95); color: var(--text); font-size: 0.74rem; font-weight: 300; }
-    h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; letter-spacing: -0.03em; margin-bottom: 14px; }
-    .lead { max-width: 760px; color: var(--muted); font-size: 1.04rem; }
-    .section-card { padding: 34px; border-radius: 34px; }
-    .gallery { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding-bottom: 8px; margin-bottom: 18px; }
-    .gallery::-webkit-scrollbar { height: 10px; }
-    .gallery::-webkit-scrollbar-thumb { background: rgba(22,22,22,0.18); border-radius: 999px; }
-    .slide { min-width: 100%; scroll-snap-align: start; border-radius: 28px; background: transparent; border: none; padding: 0; }
-    .feature-list { list-style: none; display: grid; gap: 10px; margin-top: 18px; }
-    .feature-list li { color: var(--text); font-size: 1rem; }
-    .service-note { margin-top: 24px; color: var(--muted); font-size: 1rem; }
-    .image-frame { width: 100%; max-width: 560px; height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 22px; background: #4b443e; margin: 0 auto 24px; padding: 0; box-shadow: none; border: none; overflow: hidden; }
-    .image-frame img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
-    .caption { margin-top: 12px; color: var(--muted); font-size: 0.95rem; }
-    .helper { margin-bottom: 18px; color: var(--muted); font-size: 0.95rem; }
-    .action-wrap { margin-top: 28px; }
-    .whatsapp-cta {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: min(100%, 360px);
-      min-height: 54px;
-      padding: 0 24px;
-      border-radius: 16px;
-      background: var(--wa);
-      border: 1px solid rgba(37, 211, 102, 0.95);
-      box-shadow: 0 18px 28px rgba(37, 211, 102, 0.22);
-      color: white;
-      text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .whatsapp-cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 22px 32px rgba(37, 211, 102, 0.3);
-    }
-    footer { padding: 0 0 42px; }
-    .footer-card { padding: 24px; border-radius: 24px; text-align: center; color: var(--muted); font-size: 0.85rem; }
-    .whatsapp-float { position: fixed; right: 22px; bottom: 22px; width: 62px; height: 62px; border-radius: 999px; background: var(--wa); color: white; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 18px 28px rgba(37, 211, 102, 0.28); z-index: 120; text-decoration: none; }
-    .whatsapp-float svg { width: 30px; height: 30px; display: block; }
-  :root{--graphite:#3f3934;--graphite-soft:#4b443e;--beige-ink:#e7d7c2;--beige-muted:#c8b59d;--beige-line:rgba(231,215,194,0.16);}body{color:#2c241f!important;font-family:"Avenir Next","Segoe UI",sans-serif!important;}body,button,input,textarea,select,a,h1,h2,h3,h4,h5,h6,p,span,li,strong,summary{font-family:"Avenir Next","Segoe UI",sans-serif!important;}.menu-dropdown{background:rgba(72,66,61,0.84)!important;border-bottom:1px solid rgba(231,215,194,0.12)!important;}.menu-dropdown .container,.dropdown-menu,.dropdown-btn,.hero-shell,.hero-card,.section-card,.footer-card,.item,.slide,.product-card,.sector-contact{background:rgba(63,57,52,0.92)!important;border-color:rgba(231,215,194,0.16)!important;color:var(--beige-ink)!important;--text:var(--beige-ink);--muted:var(--beige-muted);--line:var(--beige-line);--accent-link:var(--beige-ink);}.menu-dropdown .container{background:rgba(56,51,47,0.9)!important;}.dropdown-btn,.eyebrow{background:rgba(91,82,75,0.95)!important;color:var(--beige-ink)!important;border-color:rgba(231,215,194,0.18)!important;}.dropdown-menu a,.submenu-group summary,.back-arrow,.hero-shell .back-arrow,.hero-card .back-arrow,.section-card a:not(.whatsapp-float),.footer-card a{color:var(--beige-ink)!important;}.dropdown-menu a:hover,.submenu-group summary:hover{background:rgba(231,215,194,0.08)!important;}.hero-shell::after{border-color:rgba(231,215,194,0.14)!important;}.item-image,.slide img,.product-media,.gallery .slide img{background:#4b443e!important;border-color:rgba(231,215,194,0.14)!important;}.item p,.item-number,.lead,.caption,.helper,.section-head span,.footer-card,.sector-contact,.product-copy,.product-index,p.lead{color:var(--beige-muted)!important;}</style>
-  <link rel="stylesheet" href="site-premium.css">
+<link rel="stylesheet" href="site-premium.css">
 </head>
 <body>
-    <nav class="menu-dropdown">
+      <nav class="menu-dropdown" aria-label="Menú principal">
     <div class="container">
-      <button class="dropdown-btn">Menu</button>
-      <ul class="dropdown-menu">
+      <button class="dropdown-btn" aria-expanded="false" aria-controls="nav-menu">Menu</button>
+      <ul class="dropdown-menu" id="nav-menu">
         <li><a href="index.html">Home</a></li>
         <li><details class="submenu-group">
           <summary>Cocina</summary>
@@ -109,14 +21,15 @@
           </ul>
         </details></li>
         <li><details class="submenu-group">
-          <summary>Climatizacion</summary>
+          <summary>Climatización</summary>
           <ul class="submenu">
-            <li><a href="climatizacion.html">Ver climatizacion</a></li>
+            <li><a href="climatizacion.html">Ver climatización</a></li>
             <li><a href="climatizacion-multisplit.html">↳ Multisplit</a></li>
             <li><a href="climatizacion-piso-techo.html">↳ Piso techo</a></li>
             <li><a href="climatizacion-baja-silueta.html">↳ Baja silueta</a></li>
           </ul>
         </details></li>
+        <li><a href="pequenos-electrodomesticos.html">Pequeños electrodomésticos</a></li>
         <li><a href="contacto.html">Contacto</a></li>
         <li><a href="sobre-nosotros.html">Sobre nosotros</a></li>
       </ul>
@@ -161,7 +74,7 @@
         <p class="service-note">Realizamos el asesoramiento del Proyecto, provisión de los equipos e instalación.</p>
 
         <div class="action-wrap">
-          <a class="whatsapp-cta" href="https://wa.me/5491131303223?text=Hola%2C%20estoy%20interesado%20en%20los%20productos" target="_blank">Solicitá asesoramiento y cotización</a>
+          <a class="whatsapp-cta" href="https://wa.me/5491131303223?text=Hola%2C%20estoy%20interesado%20en%20los%20productos" target="_blank" rel="noopener noreferrer">Solicitá asesoramiento y cotización</a>
         </div>
       </section>
     </div>
@@ -173,7 +86,7 @@
     </div>
   </footer>
 
-  <a class="whatsapp-float" href="https://wa.me/5491131303223?text=Hola%2C%20estoy%20interesado%20en%20los%20productos" target="_blank" aria-label="Abrir WhatsApp">
+  <a class="whatsapp-float" href="https://wa.me/5491131303223?text=Hola%2C%20estoy%20interesado%20en%20los%20productos" target="_blank" rel="noopener noreferrer" aria-label="Abrir WhatsApp">
     <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
       <path d="M19.11 17.23c-.29-.15-1.73-.85-2-.95-.27-.1-.47-.15-.67.15-.19.29-.76.94-.93 1.14-.17.19-.34.22-.63.07-.29-.15-1.24-.46-2.36-1.47-.88-.79-1.47-1.76-1.64-2.05-.17-.29-.02-.45.13-.6.13-.13.29-.34.44-.51.15-.17.19-.29.29-.49.1-.19.05-.36-.02-.51-.07-.15-.67-1.62-.92-2.22-.24-.58-.48-.5-.67-.51h-.57c-.19 0-.51.07-.78.36-.27.29-1.02 1-1.02 2.44 0 1.44 1.05 2.83 1.19 3.02.15.19 2.06 3.14 5 4.4.7.3 1.25.48 1.68.62.7.22 1.34.19 1.84.12.56-.08 1.73-.71 1.97-1.39.24-.68.24-1.26.17-1.39-.07-.12-.27-.19-.56-.34zM16.03 3.2c-7.07 0-12.8 5.73-12.8 12.8 0 2.25.59 4.45 1.71 6.39L3 29l6.79-1.78c1.87 1.02 3.97 1.56 6.24 1.56h.01c7.07 0 12.8-5.73 12.8-12.8S23.1 3.2 16.03 3.2zm0 23.28h-.01c-2 0-3.96-.54-5.67-1.56l-.41-.24-4.03 1.06 1.08-3.93-.27-.41c-1.06-1.68-1.62-3.63-1.62-5.62 0-5.95 4.84-10.8 10.8-10.8 2.88 0 5.58 1.12 7.62 3.16 2.04 2.04 3.16 4.74 3.16 7.63 0 5.96-4.85 10.8-10.8 10.8z"/>
     </svg>
