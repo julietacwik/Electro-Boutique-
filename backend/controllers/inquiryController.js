@@ -101,25 +101,40 @@ async function getAllInquiries(req, res, next) {
   try {
     const [rows] = await pool.query(`
       SELECT
-        i.id_inquiry,
+        i.id_inquiry  AS id,
         i.message,
         i.status,
-        i.created_at,
-        c.id_client,
-        c.name AS client_name,
-        c.email AS client_email,
-        c.phone AS client_phone,
-        p.id_product,
-        p.name AS product_name,
-        p.brand AS product_brand,
-        p.category AS product_category
+        i.created_at  AS createdAt,
+        c.name,
+        c.email,
+        c.phone,
+        p.name        AS productName
       FROM inquiries i
       INNER JOIN clients c ON c.id_client = i.id_client
       LEFT JOIN products p ON p.id_product = i.id_product
       ORDER BY i.created_at DESC, i.id_inquiry DESC
     `);
 
-    res.json(rows);
+    res.json({ messages: rows });
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function deleteInquiry(req, res, next) {
+  try {
+    const inquiryId = Number(req.params.id);
+    if (!inquiryId) {
+      return res.status(400).json({ error: "ID invalido." });
+    }
+    const [result] = await pool.query(
+      "DELETE FROM inquiries WHERE id_inquiry = ?",
+      [inquiryId]
+    );
+    if (!result.affectedRows) {
+      return res.status(404).json({ error: "Consulta no encontrada." });
+    }
+    res.json({ message: "Mensaje eliminado correctamente." });
   } catch (error) {
     next(error);
   }
@@ -158,5 +173,6 @@ async function updateInquiryStatus(req, res, next) {
 module.exports = {
   createInquiry,
   getAllInquiries,
-  updateInquiryStatus
+  updateInquiryStatus,
+  deleteInquiry
 };

@@ -308,12 +308,14 @@
       }
 
       const data = await response.json();
-      adminMeta.textContent = `Sesion iniciada como ${data.user.username || data.user.email}.`;
+      const admin = data.user ?? data.admin ?? data;
+      const display = admin?.email ?? admin?.username ?? "administrador";
+      adminMeta.textContent = `Sesión iniciada como ${display}.`;
     }
 
     function renderRows(messages) {
       totalCount.textContent = messages.length;
-      newCount.textContent = messages.filter((message) => message.status === "new").length;
+      newCount.textContent = messages.filter((message) => message.status === "pending").length;
       repliedCount.textContent = messages.filter((message) => message.status === "replied").length;
 
       if (!messages.length) {
@@ -351,8 +353,9 @@
       }
 
       const data = await response.json();
-      renderRows(data.messages || []);
-      setFeedback(`Se cargaron ${data.messages.length} mensajes.`, "success");
+      const messages = data.messages || [];
+      renderRows(messages);
+      setFeedback(`Se cargaron ${messages.length} mensajes.`, "success");
     }
 
     async function updateStatus(id, status) {

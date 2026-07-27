@@ -195,6 +195,12 @@ footer {
   letter-spacing: 0.03em;
 }
 
+.dropdown-menu .nav-admin-item {
+  border-top: 1px solid rgba(231, 215, 194, 0.10);
+  margin-top: 14px;
+  padding-top: 4px;
+}
+
 .submenu-group {
   border-radius: 16px;
 }

@@ -1,18 +1,24 @@
 const jwt = require("jsonwebtoken");
 
-function requireAuth(req, res, next) {
-  const authHeader = req.headers.authorization || "";
-  const [scheme, token] = authHeader.split(" ");
+function extractToken(req) {
+  const cookieHeader = req.headers.cookie || "";
+  const cookieEntry = cookieHeader.split(";").find(c => c.trim().startsWith("token="));
+  if (cookieEntry) {
+    return cookieEntry.trim().slice("token=".length);
+  }
+  const [scheme, bearer] = (req.headers.authorization || "").split(" ");
+  return scheme === "Bearer" && bearer ? bearer : null;
+}
 
-  if (scheme !== "Bearer" || !token) {
+function requireAuth(req, res, next) {
+  const token = extractToken(req);
+  if (!token) {
     return res.status(401).json({ error: "No autorizado." });
   }
-
   try {
-    const payload = jwt.verify(token, process.env.JWT_SECRET);
-    req.admin = payload;
+    req.admin = jwt.verify(token, process.env.JWT_SECRET);
     next();
-  } catch (error) {
+  } catch {
     return res.status(401).json({ error: "Token invalido o vencido." });
   }
 }

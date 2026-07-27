@@ -2,7 +2,6 @@ const path = require("path");
 const express = require("express");
 const dotenv = require("dotenv");
 const pool = require("./db");
-const authRoutes = require("./routes/authRoutes");
 const inquiryRoutes = require("./routes/inquiryRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const { notFoundHandler, errorHandler } = require("./middleware/errorMiddleware");
@@ -26,7 +25,6 @@ app.get("/api/health", async (req, res, next) => {
 });
 
 app.use("/api/inquiries", inquiryRoutes);
-app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
 
 app.use(express.static(staticRoot));
@@ -37,6 +35,14 @@ app.get("/", (req, res) => {
 
 app.get("/admin", (req, res) => {
   res.sendFile(path.join(staticRoot, "admin.html"));
+});
+
+app.get("/admin-login", (req, res) => {
+  res.sendFile(path.join(staticRoot, "admin-login.html"));
+});
+
+app.get("/admin-dashboard", (req, res) => {
+  res.sendFile(path.join(staticRoot, "admin-dashboard.html"));
 });
 
 app.use(notFoundHandler);
