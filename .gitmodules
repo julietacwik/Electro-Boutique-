@@ -1,2 +1,4 @@
 [submodule "Electro-Boutique-"]
 	path = Electro-Boutique-
+	url = https://github.com/julietacwik/Electro-Boutique-.git
+	branch = main
