@@ -2,6 +2,16 @@
   const body = document.body;
   if (!body) return;
 
+  const navContainer = document.querySelector(".menu-dropdown > .container");
+  if (navContainer && !navContainer.querySelector(".navbar-brand")) {
+    const brand = document.createElement("a");
+    brand.href = "index.html";
+    brand.className = "navbar-brand";
+    brand.setAttribute("aria-label", "Electro Boutique - Inicio");
+    brand.innerHTML = '<img src="logo-electro-boutique-transparente.png" alt="Electro Boutique" class="navbar-logo">';
+    navContainer.prepend(brand);
+  }
+
   const icons = {
     telefono: `
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -32,8 +42,58 @@
     return icons.telefono;
   };
 
+  const contactChannels = [
+    {
+      label: "TELÉFONO",
+      value: "+54 9 11 3130-3223",
+      href: "tel:+5491131303223",
+      ariaLabel: "Llamar al +54 9 11 3130-3223"
+    },
+    {
+      label: "MAIL",
+      value: "eboutiqueventas@gmail.com",
+      href: "mailto:eboutiqueventas@gmail.com",
+      ariaLabel: "Enviar un correo a eboutiqueventas@gmail.com"
+    },
+    {
+      label: "INSTAGRAM",
+      value: "Instagram",
+      href: "https://www.instagram.com/electroboutique_ar?igsh=MTVucmZvcDMxMnpoNw==",
+      ariaLabel: "Visitar Instagram de Electro Boutique",
+      external: true
+    }
+  ];
+
+  const renderContactChannels = () => contactChannels.map((channel) => `
+    <div class="sector-contact-card">
+      <span class="sector-contact-icon" aria-hidden="true">${iconFor(channel.label)}</span>
+      <div class="sector-contact-body">
+        <span class="sector-contact-label">${channel.label}</span>
+        <a
+          class="sector-contact-value"
+          href="${channel.href}"
+          aria-label="${channel.ariaLabel}"
+          ${channel.external ? 'target="_blank" rel="noopener noreferrer"' : ""}
+        >${channel.value}</a>
+      </div>
+    </div>
+  `).join("");
+
   const page = window.location.pathname.split("/").pop() || "index.html";
   body.dataset.page = page;
+
+  if (document.querySelector(".menu-dropdown")) {
+    body.classList.add("site-page");
+  }
+
+  const isDetailPage = /-\d{2}\.html$/i.test(page);
+  const isCategoryPage = Boolean(document.querySelector(".hero-shell")) &&
+    !isDetailPage &&
+    !["index.html", "contacto.html", "sobre-nosotros.html", "admin.html"].includes(page);
+
+  if (isCategoryPage) {
+    body.classList.add("category-page");
+  }
 
   if (page.startsWith("cocina")) {
     body.dataset.section = "cocina";
@@ -167,57 +227,20 @@
     }
   }
 
-  const contactStrip = document.querySelector(".sector-contact");
-  if (contactStrip && !contactStrip.classList.contains("premium-contact-strip")) {
-    const links = Array.from(contactStrip.querySelectorAll("a"));
-    if (links.length) {
-      const items = links.map((link) => {
-        const href = link.getAttribute("href") || "";
-        let label = "Contacto";
-        if (href.startsWith("tel:")) label = "Telefono";
-        else if (href.startsWith("mailto:")) label = "Mail";
-        else if (href.includes("instagram")) label = "Instagram";
-        else if (href.includes("wa.me")) label = "WhatsApp";
-
-        const value = link.textContent.trim();
-        return `
-          <div class="sector-contact-card">
-            <span class="sector-contact-icon">${iconFor(label)}</span>
-            <div class="sector-contact-body">
-              <span class="sector-contact-label">${label}</span>
-              <span class="sector-contact-value">${value}</span>
-              <a class="sector-contact-link" href="${href}"${link.target ? ` target="${link.target}"` : ""}>Abrir</a>
-            </div>
-          </div>
-        `;
-      });
-
-      contactStrip.classList.add("premium-contact-strip");
-      contactStrip.innerHTML = items.join("");
+  let contactStrip = document.querySelector(".sector-contact");
+  if (!contactStrip && body.classList.contains("category-page")) {
+    const contactHost = document.querySelector("main .section-card");
+    if (contactHost) {
+      contactStrip = document.createElement("div");
+      contactStrip.className = "sector-contact";
+      contactHost.appendChild(contactStrip);
     }
   }
 
-  document.querySelectorAll(".contact-item").forEach((item) => {
-    if (item.querySelector(".contact-icon")) return;
-    const label = item.querySelector(".contact-label")?.textContent.trim() || "Contacto";
-    const strong = item.querySelector("strong");
-    const link = item.querySelector("a");
-    const bodyWrap = document.createElement("div");
-    bodyWrap.className = "contact-item-body";
-
-    const icon = document.createElement("span");
-    icon.className = "contact-icon";
-    icon.innerHTML = iconFor(label);
-
-    const labelNode = item.querySelector(".contact-label");
-    if (labelNode) bodyWrap.appendChild(labelNode);
-    if (strong) bodyWrap.appendChild(strong);
-    if (link) bodyWrap.appendChild(link);
-
-    item.innerHTML = "";
-    item.appendChild(icon);
-    item.appendChild(bodyWrap);
-  });
+  if (contactStrip) {
+    contactStrip.classList.add("premium-contact-strip");
+    contactStrip.innerHTML = renderContactChannels();
+  }
 
   document.querySelectorAll(".footer-card").forEach((footer) => {
     if (footer.querySelector(".footer-address")) return;

@@ -36,6 +36,14 @@ body::before {
   z-index: 0;
 }
 
+body.site-page,
+body.home-page,
+body:has(.menu-dropdown) {
+  background:
+    linear-gradient(90deg, rgba(18, 13, 10, 0.88) 0%, rgba(28, 21, 17, 0.52) 48%, rgba(24, 18, 15, 0.14) 100%),
+    url("hero-cocina-premium.png") center center / cover fixed no-repeat;
+}
+
 body > * {
   position: relative;
   z-index: 1;
@@ -111,7 +119,7 @@ footer {
   position: sticky;
   top: 0;
   z-index: 100;
-  padding: 16px 0;
+  padding: 8px 0;
   background: rgba(45, 39, 35, 0.5);
   border-bottom: 1px solid rgba(231, 215, 194, 0.08);
   backdrop-filter: blur(16px);
@@ -119,28 +127,70 @@ footer {
 
 .menu-dropdown .container {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   gap: 20px;
   position: relative;
-  padding: 15px 22px;
-  border: 1px solid rgba(231, 215, 194, 0.12);
-  border-radius: 999px;
-  background: linear-gradient(180deg, rgba(56, 51, 47, 0.9), rgba(45, 40, 36, 0.96));
-  box-shadow: 0 16px 34px rgba(16, 12, 10, 0.14);
+  width: 100%;
+  margin: 0;
+  padding-block: 7px;
+  padding-inline: clamp(20px, 4vw, 64px);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  flex: 0 1 auto;
+  min-width: 0;
+  height: 44px;
+  padding: 0;
+  overflow: hidden;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.navbar-logo {
+  display: block;
+  width: 210px;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 .dropdown-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  flex: 0 0 auto;
   border: 1px solid rgba(231, 215, 194, 0.18);
   background: rgba(91, 82, 75, 0.95);
   color: #eadbc8;
   border-radius: 999px;
-  padding: 12px 18px;
+  padding: 9px 16px;
   font: inherit;
   font-weight: 300;
   letter-spacing: 0.02em;
   cursor: pointer;
   transition: background 0.2s ease;
+}
+
+.menu-dropdown .dropdown-btn::after {
+  content: "";
+  width: 17px;
+  height: 12px;
+  background: repeating-linear-gradient(
+    to bottom,
+    currentColor 0 1px,
+    transparent 1px 5px
+  );
+  opacity: 0.82;
 }
 
 .dropdown-btn:hover {
@@ -306,6 +356,70 @@ footer {
   pointer-events: none;
 }
 
+.home-page > header {
+  padding: 0;
+}
+
+.home-page > header > .container {
+  width: 100%;
+}
+
+.home-page .hero-shell {
+  overflow: visible;
+  min-height: calc(100svh - 74px);
+  padding: clamp(56px, 7vw, 112px) clamp(32px, 8vw, 136px) 120px;
+  border: 0;
+  border-radius: 0;
+  background:
+    linear-gradient(90deg, rgba(18, 13, 10, 0.68) 0%, rgba(28, 21, 17, 0.22) 48%, transparent 72%);
+  box-shadow: none;
+  margin-bottom: 0;
+}
+
+.home-page .hero-shell::after {
+  display: none;
+}
+
+.site-page:not(.home-page) .hero-shell {
+  overflow: visible;
+  padding: clamp(38px, 5vw, 68px);
+  border: 0;
+  border-radius: 0;
+  background:
+    linear-gradient(90deg, rgba(18, 13, 10, 0.7) 0%, rgba(28, 21, 17, 0.3) 52%, transparent 82%);
+  box-shadow: none;
+}
+
+.site-page:not(.home-page) .hero-shell::after {
+  display: none;
+}
+
+.category-page .hero-shell {
+  min-height: clamp(300px, 42svh, 480px);
+  margin-bottom: 0;
+}
+
+.category-page .hero-shell > .hero-logo-wrap,
+.category-page .hero > .hero-logo-wrap {
+  display: none;
+}
+
+.category-page .hero-shell h1 {
+  max-width: 820px;
+  font-family: "Bodoni 72", Didot, Georgia, serif;
+  font-size: clamp(3.2rem, 6vw, 6rem);
+  font-weight: 400;
+  line-height: 0.94;
+  letter-spacing: -0.045em;
+}
+
+.category-page .hero-shell p,
+.category-page .hero-shell .lead {
+  max-width: 680px;
+  font-size: clamp(1rem, 1.35vw, 1.12rem);
+  line-height: 1.65;
+}
+
 .hero-shell > *,
 .hero-shell .hero > * {
   position: relative;
@@ -417,6 +531,25 @@ body[data-page="climatizacion.html"] .hero {
   backdrop-filter: blur(12px);
 }
 
+.site-page .section-card {
+  background: linear-gradient(180deg, rgba(66, 59, 53, 0.84), rgba(52, 45, 40, 0.9));
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 26px 64px rgba(18, 14, 12, 0.2);
+  backdrop-filter: blur(16px);
+}
+
+.category-page main {
+  padding-top: 0;
+}
+
+.category-page > header + main {
+  margin-top: -36px;
+}
+
+.category-page main .hero-shell + .section-card {
+  margin-top: -34px;
+}
+
 .section-head {
   display: flex;
   justify-content: space-between;
@@ -523,6 +656,111 @@ body[data-page="climatizacion.html"] .hero {
   background:
     radial-gradient(circle at top left, rgba(255, 255, 255, 0.06), transparent 38%),
     #4b443e;
+}
+
+.oven-feature-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.oven-feature-card__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.oven-feature-card__image {
+  object-fit: cover;
+  object-position: center;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.04), transparent 38%),
+    #3f3934;
+}
+
+.oven-feature-card__image--contain {
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+  object-position: center;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.04), transparent 38%),
+    #3f3934;
+}
+
+.oven-feature-card h3 {
+  overflow-wrap: anywhere;
+}
+
+.oven-feature-card__description {
+  margin-bottom: 16px;
+}
+
+.oven-feature-list {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+  color: #d8c8b6;
+  font-size: 0.9rem;
+}
+
+.oven-feature-list li {
+  position: relative;
+  padding-left: 17px;
+}
+
+.oven-feature-list li::before {
+  content: "";
+  position: absolute;
+  top: 0.66em;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #c9b194;
+  box-shadow: 0 0 0 3px rgba(201, 177, 148, 0.1);
+}
+
+.oven-feature-card__more[hidden] {
+  display: none;
+}
+
+.oven-feature-card__more .oven-feature-list {
+  padding-top: 14px;
+  border-top: 1px solid rgba(231, 215, 194, 0.1);
+}
+
+.oven-feature-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  margin-top: auto;
+  padding: 12px 15px;
+  border: 1px solid rgba(231, 215, 194, 0.18);
+  border-radius: 999px;
+  background: rgba(39, 33, 29, 0.28);
+  color: #f0e4d4;
+  font: inherit;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.oven-feature-toggle::after {
+  content: "+";
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.oven-feature-toggle[aria-expanded="true"]::after {
+  content: "−";
+}
+
+.oven-feature-toggle:hover {
+  background: rgba(231, 215, 194, 0.08);
+  border-color: rgba(231, 215, 194, 0.28);
 }
 
 .img-cutout {
@@ -953,33 +1191,61 @@ body[data-page="climatizacion.html"] .hero {
   color: #cbb8a3;
 }
 
-.sector-contact-value,
-.contact-item-body strong {
+.sector-contact-value {
   color: #f0e4d4;
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.4;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+  transition: color 0.2s ease, opacity 0.2s ease;
 }
 
-.sector-contact-link,
-.contact-item-body a {
+.sector-contact-link {
   color: #e7d5be;
   font-size: 0.92rem;
   overflow-wrap: anywhere;
 }
 
+.sector-contact-value:hover,
+.sector-contact-value:focus-visible {
+  color: #e7d5be;
+}
+
 .contact-item {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 14px;
+  padding: 18px;
+  border: 1px solid rgba(231, 215, 194, 0.1);
+  border-radius: 20px;
+  background: rgba(83, 75, 68, 0.56);
+  color: inherit;
 }
 
 .contact-label {
-  margin-bottom: 2px;
+  color: #cbb8a3;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
-.contact-item strong {
-  margin-bottom: 2px;
+.contact-value {
+  color: #f0e4d4;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.4;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.contact-value:hover,
+.contact-value:focus-visible {
+  color: #e7d5be;
 }
 
 /* --- FOOTER --- */
@@ -1035,40 +1301,71 @@ body[data-page="climatizacion.html"] .hero {
 
 /* --- INDEX: HERO COPY --- */
 .hero-copy {
-  max-width: 720px;
+  width: 48%;
+  max-width: 680px;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: clamp(26px, 3.8vw, 40px);
-  border-radius: 34px;
-  background: linear-gradient(180deg, rgba(37, 29, 24, 0.7), rgba(37, 29, 24, 0.48));
-  border: 1px solid rgba(239, 226, 212, 0.08);
-  backdrop-filter: blur(18px);
-  box-shadow: 0 26px 60px rgba(14, 10, 8, 0.24);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
 }
 
-.hero-visual {
-  width: 100%;
-  margin-bottom: 14px;
+.hero-copy .eyebrow {
+  margin-bottom: 28px;
+  padding: 9px 16px;
+  font-size: 0.74rem;
+}
+
+.hero-copy .eyebrow::before {
+  content: "✦";
+  margin-right: 8px;
+  color: #e7d5be;
+}
+
+.hero-copy h1 {
+  max-width: 650px;
+  margin-bottom: 28px;
+  font-family: "Bodoni 72", Didot, Georgia, serif;
+  font-size: clamp(4rem, 6.6vw, 7rem);
+  font-weight: 400;
+  line-height: 0.86;
+  letter-spacing: -0.045em;
+}
+
+.hero-copy h1 span {
+  display: block;
+}
+
+.hero-copy > p {
+  max-width: 560px;
+  margin-bottom: 24px;
+  font-size: clamp(0.98rem, 1.18vw, 1.08rem);
+  line-height: 1.55;
 }
 
 .hero-highlights {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 0 0 24px;
+  flex-wrap: nowrap;
+  gap: 6px;
+  width: 100%;
+  margin: 0 0 30px;
 }
 
 .hero-highlights span {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
+  gap: 6px;
+  padding: 10px 13px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(239, 226, 212, 0.12);
   color: #ebdfcf;
-  font-size: 0.84rem;
+  font-size: 0.76rem;
   letter-spacing: 0.02em;
 }
 
@@ -1084,8 +1381,9 @@ body[data-page="climatizacion.html"] .hero {
 
 .hero-actions {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 14px;
+  width: 100%;
   margin-bottom: 18px;
 }
 
@@ -1093,11 +1391,12 @@ body[data-page="climatizacion.html"] .hero {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 52px;
-  padding: 0 22px;
+  min-height: 48px;
+  padding: 0 18px;
   border-radius: 999px;
   text-decoration: none;
   font-weight: 300;
+  font-size: 0.9rem;
   letter-spacing: 0.01em;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -1107,6 +1406,12 @@ body[data-page="climatizacion.html"] .hero {
   background: linear-gradient(135deg, #e7d5be 0%, #c9b194 100%);
   box-shadow: 0 18px 36px rgba(21, 15, 12, 0.24);
   font-weight: 500;
+}
+
+.pill-link.primary::after {
+  content: "→";
+  margin-left: 18px;
+  font-size: 1.1em;
 }
 
 .pill-link.secondary {
@@ -1590,7 +1895,64 @@ body[data-page="climatizacion.html"] .hero {
 }
 
 /* --- RESPONSIVE --- */
+@media (max-width: 1100px) {
+  .hero-copy {
+    width: 54%;
+  }
+
+  .hero-highlights,
+  .hero-actions {
+    flex-wrap: wrap;
+  }
+}
+
+.home-page main {
+  margin-top: -62px;
+  padding-top: 0;
+}
+
+.home-page main > .container {
+  width: min(1200px, calc(100% - 48px));
+}
+
+.home-page main section:first-child .section-card {
+  background: linear-gradient(180deg, rgba(57, 50, 44, 0.88), rgba(45, 39, 34, 0.94));
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 34px 90px rgba(12, 9, 8, 0.3);
+  backdrop-filter: blur(18px);
+}
+
+.home-page main section:first-child .section-head h2 {
+  font-family: "Bodoni 72", Didot, Georgia, serif;
+  font-size: clamp(2rem, 3.2vw, 3rem);
+  letter-spacing: -0.025em;
+}
+
 @media (max-width: 900px) {
+  body.site-page,
+  body.home-page,
+  body:has(.menu-dropdown) {
+    background-attachment: scroll;
+    background-position: center top;
+  }
+
+  .home-page .hero-shell {
+    min-height: 0;
+    padding: 48px clamp(24px, 6vw, 48px) 110px;
+  }
+
+  .site-page:not(.home-page) .hero-shell {
+    padding: 36px 28px 54px;
+  }
+
+  .category-page .hero-shell {
+    min-height: 0;
+  }
+
+  .category-page .hero-shell h1 {
+    font-size: clamp(2.8rem, 8vw, 4.5rem);
+  }
+
   .hero-shell {
     min-height: 0;
     padding: 26px;
@@ -1623,11 +1985,15 @@ body[data-page="climatizacion.html"] .hero {
   }
 
   .menu-dropdown .container {
-    padding: 14px 16px;
+    padding: 7px 16px;
   }
 
   .dropdown-btn {
-    padding: 10px 14px;
+    padding: 8px 13px;
+  }
+
+  .navbar-logo {
+    width: 145px;
   }
 
   .section-card {
@@ -1640,6 +2006,11 @@ body[data-page="climatizacion.html"] .hero {
 
   .premium-hero-actions a {
     width: 100%;
+  }
+
+  .hero-copy {
+    width: 72%;
+    max-width: 620px;
   }
 
   .sector-contact.premium-contact-strip {
@@ -1663,11 +2034,77 @@ body[data-page="climatizacion.html"] .hero {
 }
 
 @media (max-width: 640px) {
+  .home-page .hero-shell {
+    padding: 40px 20px 94px;
+  }
+
+  .home-page main {
+    margin-top: -48px;
+  }
+
+  .home-page main > .container {
+    width: calc(100% - 24px);
+  }
+
+  .site-page:not(.home-page) .hero-shell {
+    padding: 30px 8px 46px;
+  }
+
+  .category-page > header + main,
+  .category-page main .hero-shell + .section-card {
+    margin-top: -20px;
+  }
+
+  .category-page .hero-shell h1 {
+    font-size: clamp(2.4rem, 12vw, 3.35rem);
+    line-height: 0.98;
+  }
+
+  .menu-dropdown .container {
+    gap: 12px;
+  }
+
+  .navbar-logo {
+    width: 130px;
+  }
+
+  .navbar-brand {
+    height: 40px;
+  }
+
+  .hero-copy {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .oven-feature-card {
+    padding: 18px;
+  }
+
+  .oven-feature-card h3 {
+    font-size: 1.08rem;
+    line-height: 1.28;
+  }
+
+  .oven-feature-card__description {
+    font-size: 0.9rem;
+    line-height: 1.45;
+  }
+
+  .oven-feature-list {
+    gap: 7px;
+    font-size: 0.84rem;
+  }
+
+  .oven-feature-toggle {
+    padding: 11px 14px;
+    font-size: 0.84rem;
+  }
+
   body {
     padding-bottom: 96px;
   }
 
-  body[data-page="index.html"] .hero-highlights,
   body[data-page="sobre-nosotros.html"] .hero-metrics,
   body[data-page="index.html"] .benefits-section .benefit-card:nth-child(3),
   body[data-page="index.html"] .benefits-section .benefit-card:nth-child(4) {
@@ -1696,6 +2133,10 @@ body[data-page="climatizacion.html"] .hero {
   .hero-highlights span {
     width: 100%;
     justify-content: flex-start;
+  }
+
+  .hero-copy h1 span {
+    display: inline;
   }
 
   .hero-actions {
